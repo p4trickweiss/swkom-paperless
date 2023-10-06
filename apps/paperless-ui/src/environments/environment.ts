@@ -8,7 +8,7 @@ export const environment = {
   apiVersion: '3',
   appTitle: 'Paperless-ngx',
   version: 'DEVELOPMENT',
-  webSocketHost: 'localhost:8000',
+  webSocketHost: 'localhost:8080',
   webSocketProtocol: 'ws:',
   webSocketBaseUrl: '/ws/',
 }
