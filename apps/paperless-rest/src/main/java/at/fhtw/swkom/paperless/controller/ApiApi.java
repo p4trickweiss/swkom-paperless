@@ -1144,7 +1144,7 @@ public interface ApiApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"next\" : 6, \"all\" : [ 5, 5 ], \"previous\" : 1, \"count\" : 0, \"results\" : [ { \"owner\" : { \"is_superuser\" : true, \"is_active\" : true, \"user_permissions\" : [ 9, 9 ], \"is_staff\" : true, \"last_login\" : \"last_login\", \"last_name\" : \"last_name\", \"groups\" : [ \"\", \"\" ], \"password\" : \"password\", \"id\" : 7, \"date_joined\" : \"date_joined\", \"first_name\" : \"first_name\", \"email\" : \"email\", \"username\" : \"username\" }, \"user_can_change\" : true, \"sort_field\" : \"sort_field\", \"show_on_dashboard\" : true, \"name\" : \"name\", \"show_in_sidebar\" : true, \"filter_rules\" : [ { \"rule_type\" : 2, \"value\" : \"value\" }, { \"rule_type\" : 2, \"value\" : \"value\" } ], \"sort_reverse\" : true, \"id\" : 5 }, { \"owner\" : { \"is_superuser\" : true, \"is_active\" : true, \"user_permissions\" : [ 9, 9 ], \"is_staff\" : true, \"last_login\" : \"last_login\", \"last_name\" : \"last_name\", \"groups\" : [ \"\", \"\" ], \"password\" : \"password\", \"id\" : 7, \"date_joined\" : \"date_joined\", \"first_name\" : \"first_name\", \"email\" : \"email\", \"username\" : \"username\" }, \"user_can_change\" : true, \"sort_field\" : \"sort_field\", \"show_on_dashboard\" : true, \"name\" : \"name\", \"show_in_sidebar\" : true, \"filter_rules\" : [ { \"rule_type\" : 2, \"value\" : \"value\" }, { \"rule_type\" : 2, \"value\" : \"value\" } ], \"sort_reverse\" : true, \"id\" : 5 } ] }";
+                    String exampleString = "{\"count\":0,\"next\":null,\"previous\":null,\"all\":[],\"results\":[]}";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1258,7 +1258,7 @@ public interface ApiApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "[ { \"date_done\" : \"date_done\", \"result\" : \"result\", \"acknowledged\" : true, \"task_file_name\" : \"task_file_name\", \"date_created\" : \"date_created\", \"related_document\" : \"related_document\", \"task_id\" : \"task_id\", \"id\" : 0, \"type\" : \"type\", \"status\" : \"status\" }, { \"date_done\" : \"date_done\", \"result\" : \"result\", \"acknowledged\" : true, \"task_file_name\" : \"task_file_name\", \"date_created\" : \"date_created\", \"related_document\" : \"related_document\", \"task_id\" : \"task_id\", \"id\" : 0, \"type\" : \"type\", \"status\" : \"status\" } ]";
+                    String exampleString = "[]";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1320,7 +1320,131 @@ public interface ApiApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"settings\" : { \"update_checking\" : { \"backend_setting\" : \"backend_setting\" } }, \"permissions\" : [ \"permissions\", \"permissions\" ], \"display_name\" : \"display_name\", \"user\" : { \"is_superuser\" : true, \"groups\" : [ \"\", \"\" ], \"id\" : 0, \"username\" : \"username\" } }";
+                    String exampleString = """
+                            {
+                                "user": {
+                                    "id": 3,
+                                    "username": "demo",
+                                    "is_superuser": true,
+                                    "groups": []
+                                },
+                                "settings": {
+                                    "tour_complete": true,
+                                    "update_checking": {
+                                        "backend_setting": "default"
+                                    }
+                                },
+                                "permissions": [
+                                    "delete_note",
+                                    "view_permission",
+                                    "add_mailrule",
+                                    "delete_contenttype",
+                                    "change_paperlesstask",
+                                    "change_permission",
+                                    "change_chordcounter",
+                                    "delete_mailaccount",
+                                    "change_tag",
+                                    "view_paperlesstask",
+                                    "add_tokenproxy",
+                                    "delete_chordcounter",
+                                    "delete_userobjectpermission",
+                                    "change_savedviewfilterrule",
+                                    "view_chordcounter",
+                                    "delete_groupobjectpermission",
+                                    "add_groupobjectpermission",
+                                    "delete_savedviewfilterrule",
+                                    "view_storagepath",
+                                    "change_savedview",
+                                    "view_mailaccount",
+                                    "add_userobjectpermission",
+                                    "add_note",
+                                    "add_storagepath",
+                                    "delete_documenttype",
+                                    "view_group",
+                                    "change_documenttype",
+                                    "add_chordcounter",
+                                    "change_note",
+                                    "delete_groupresult",
+                                    "change_document",
+                                    "view_user",
+                                    "change_taskresult",
+                                    "add_log",
+                                    "view_groupresult",
+                                    "delete_permission",
+                                    "view_tag",
+                                    "view_correspondent",
+                                    "view_processedmail",
+                                    "view_logentry",
+                                    "view_session",
+                                    "change_contenttype",
+                                    "add_savedviewfilterrule",
+                                    "view_documenttype",
+                                    "add_session",
+                                    "change_logentry",
+                                    "add_paperlesstask",
+                                    "view_savedview",
+                                    "add_savedview",
+                                    "delete_correspondent",
+                                    "change_uisettings",
+                                    "change_tokenproxy",
+                                    "view_mailrule",
+                                    "add_uisettings",
+                                    "view_taskresult",
+                                    "change_token",
+                                    "view_token",
+                                    "change_correspondent",
+                                    "delete_paperlesstask",
+                                    "change_groupresult",
+                                    "add_mailaccount",
+                                    "add_document",
+                                    "view_userobjectpermission",
+                                    "change_storagepath",
+                                    "delete_taskresult",
+                                    "delete_log",
+                                    "view_groupobjectpermission",
+                                    "delete_user",
+                                    "delete_document",
+                                    "add_contenttype",
+                                    "delete_processedmail",
+                                    "delete_session",
+                                    "add_permission",
+                                    "change_userobjectpermission",
+                                    "view_document",
+                                    "add_tag",
+                                    "add_correspondent",
+                                    "delete_uisettings",
+                                    "view_uisettings",
+                                    "add_logentry",
+                                    "delete_token",
+                                    "view_note",
+                                    "change_mailrule",
+                                    "add_processedmail",
+                                    "change_group",
+                                    "delete_storagepath",
+                                    "change_user",
+                                    "add_user",
+                                    "delete_logentry",
+                                    "view_log",
+                                    "change_session",
+                                    "add_taskresult",
+                                    "add_groupresult",
+                                    "delete_mailrule",
+                                    "view_tokenproxy",
+                                    "add_token",
+                                    "view_contenttype",
+                                    "change_groupobjectpermission",
+                                    "view_savedviewfilterrule",
+                                    "delete_group",
+                                    "add_documenttype",
+                                    "add_group",
+                                    "delete_savedview",
+                                    "change_log",
+                                    "change_mailaccount",
+                                    "delete_tokenproxy",
+                                    "change_processedmail",
+                                    "delete_tag"
+                                ]
+                            }""";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1457,7 +1581,15 @@ public interface ApiApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"document_file_type_counts\" : [ { \"mime_type\" : \"mime_type\", \"mime_type_count\" : 5 }, { \"mime_type\" : \"mime_type\", \"mime_type_count\" : 5 } ], \"documents_inbox\" : 6, \"inbox_tag\" : 1, \"documents_total\" : 0, \"character_count\" : 5 }";
+                    String exampleString = """
+                            {
+                                "documents_total": 0,
+                                "documents_inbox": null,
+                                "inbox_tag": null,
+                                "document_file_type_counts": 0,
+                                "character_count": null
+                            }
+                            """;
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
