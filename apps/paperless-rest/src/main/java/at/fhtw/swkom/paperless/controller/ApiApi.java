@@ -730,7 +730,7 @@ public interface ApiApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"next\" : 6, \"all\" : [ 5, 5 ], \"previous\" : 1, \"count\" : 0, \"results\" : [ { \"owner\" : 9, \"matching_algorithm\" : 2, \"document_count\" : 7, \"is_insensitive\" : true, \"permissions\" : { \"view\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ \"\", \"\" ] }, \"change\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ \"\", \"\" ] } }, \"name\" : \"name\", \"match\" : \"match\", \"id\" : 5, \"last_correspondence\" : \"last_correspondence\", \"slug\" : \"slug\" }, { \"owner\" : 9, \"matching_algorithm\" : 2, \"document_count\" : 7, \"is_insensitive\" : true, \"permissions\" : { \"view\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ \"\", \"\" ] }, \"change\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ \"\", \"\" ] } }, \"name\" : \"name\", \"match\" : \"match\", \"id\" : 5, \"last_correspondence\" : \"last_correspondence\", \"slug\" : \"slug\" } ] }";
+                    String exampleString = "{\"count\":0,\"next\":null,\"previous\":null,\"all\":[],\"results\":[]}";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -940,7 +940,7 @@ public interface ApiApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"next\" : 6, \"all\" : [ 5, 5 ], \"previous\" : 1, \"count\" : 0, \"results\" : [ { \"owner\" : 9, \"matching_algorithm\" : 2, \"document_count\" : 7, \"is_insensitive\" : true, \"permissions\" : { \"view\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ \"\", \"\" ] }, \"change\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ \"\", \"\" ] } }, \"name\" : \"name\", \"match\" : \"match\", \"id\" : 5, \"slug\" : \"slug\" }, { \"owner\" : 9, \"matching_algorithm\" : 2, \"document_count\" : 7, \"is_insensitive\" : true, \"permissions\" : { \"view\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ \"\", \"\" ] }, \"change\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ \"\", \"\" ] } }, \"name\" : \"name\", \"match\" : \"match\", \"id\" : 5, \"slug\" : \"slug\" } ] }";
+                    String exampleString = "{\"count\":0,\"next\":null,\"previous\":null,\"all\":[],\"results\":[]}";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -993,7 +993,7 @@ public interface ApiApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"next\" : 6, \"all\" : [ 5, 5 ], \"previous\" : 1, \"count\" : 0, \"results\" : [ { \"owner\" : 4, \"user_can_change\" : true, \"archive_serial_number\" : 2, \"notes\" : [ { \"note\" : \"note\", \"created\" : \"created\", \"document\" : 1, \"id\" : 7, \"user\" : 1 }, { \"note\" : \"note\", \"created\" : \"created\", \"document\" : 1, \"id\" : 7, \"user\" : 1 } ], \"added\" : \"added\", \"created\" : \"created\", \"title\" : \"title\", \"content\" : \"content\", \"tags\" : [ 3, 3 ], \"storage_path\" : 9, \"archived_file_name\" : \"archived_file_name\", \"modified\" : \"modified\", \"correspondent\" : 2, \"original_file_name\" : \"original_file_name\", \"id\" : 5, \"created_date\" : \"created_date\", \"document_type\" : 7 }, { \"owner\" : 4, \"user_can_change\" : true, \"archive_serial_number\" : 2, \"notes\" : [ { \"note\" : \"note\", \"created\" : \"created\", \"document\" : 1, \"id\" : 7, \"user\" : 1 }, { \"note\" : \"note\", \"created\" : \"created\", \"document\" : 1, \"id\" : 7, \"user\" : 1 } ], \"added\" : \"added\", \"created\" : \"created\", \"title\" : \"title\", \"content\" : \"content\", \"tags\" : [ 3, 3 ], \"storage_path\" : 9, \"archived_file_name\" : \"archived_file_name\", \"modified\" : \"modified\", \"correspondent\" : 2, \"original_file_name\" : \"original_file_name\", \"id\" : 5, \"created_date\" : \"created_date\", \"document_type\" : 7 } ] }";
+                    String exampleString = "{\"count\":0,\"next\":null,\"previous\":null,\"all\":[],\"results\":[]}";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1032,7 +1032,7 @@ public interface ApiApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"next\" : 6, \"all\" : [ \"\", \"\" ], \"previous\" : 1, \"count\" : 0, \"results\" : [ \"\", \"\" ] }";
+                    String exampleString = "{\"count\":0,\"next\":null,\"previous\":null,\"all\":[],\"results\":[]}";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1183,7 +1183,7 @@ public interface ApiApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"next\" : true, \"all\" : [ 6, 6 ], \"previous\" : true, \"count\" : 0, \"results\" : [ { \"owner\" : 2, \"path\" : \"path\", \"matching_algorithm\" : 5, \"document_count\" : 5, \"is_insensitive\" : true, \"permissions\" : { \"view\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ 7, 7 ] }, \"change\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ 7, 7 ] } }, \"name\" : \"name\", \"match\" : \"match\", \"id\" : 1, \"slug\" : \"slug\" }, { \"owner\" : 2, \"path\" : \"path\", \"matching_algorithm\" : 5, \"document_count\" : 5, \"is_insensitive\" : true, \"permissions\" : { \"view\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ 7, 7 ] }, \"change\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ 7, 7 ] } }, \"name\" : \"name\", \"match\" : \"match\", \"id\" : 1, \"slug\" : \"slug\" } ] }";
+                    String exampleString = "{\"count\":0,\"next\":null,\"previous\":null,\"all\":[],\"results\":[]}";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1222,7 +1222,7 @@ public interface ApiApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"next\" : 6, \"all\" : [ 5, 5 ], \"previous\" : 1, \"count\" : 0, \"results\" : [ { \"owner\" : 9, \"matching_algorithm\" : 2, \"document_count\" : 7, \"color\" : \"color\", \"is_insensitive\" : true, \"permissions\" : { \"view\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ \"\", \"\" ] }, \"change\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ \"\", \"\" ] } }, \"name\" : \"name\", \"match\" : \"match\", \"id\" : 5, \"text_color\" : \"text_color\", \"is_inbox_tag\" : true, \"slug\" : \"slug\" }, { \"owner\" : 9, \"matching_algorithm\" : 2, \"document_count\" : 7, \"color\" : \"color\", \"is_insensitive\" : true, \"permissions\" : { \"view\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ \"\", \"\" ] }, \"change\" : { \"groups\" : [ \"\", \"\" ], \"users\" : [ \"\", \"\" ] } }, \"name\" : \"name\", \"match\" : \"match\", \"id\" : 5, \"text_color\" : \"text_color\", \"is_inbox_tag\" : true, \"slug\" : \"slug\" } ] }";
+                    String exampleString = "{\"count\":0,\"next\":null,\"previous\":null,\"all\":[],\"results\":[]}";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1483,7 +1483,141 @@ public interface ApiApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"next\" : 6, \"all\" : [ 5, 5 ], \"previous\" : 1, \"count\" : 0, \"results\" : [ { \"is_active\" : true, \"is_superuser\" : true, \"user_permissions\" : [ \"\", \"\" ], \"is_staff\" : true, \"last_name\" : \"last_name\", \"groups\" : [ \"\", \"\" ], \"password\" : \"password\", \"id\" : 5, \"date_joined\" : \"date_joined\", \"first_name\" : \"first_name\", \"email\" : \"email\", \"username\" : \"username\", \"inherited_permissions\" : [ \"inherited_permissions\", \"inherited_permissions\" ] }, { \"is_active\" : true, \"is_superuser\" : true, \"user_permissions\" : [ \"\", \"\" ], \"is_staff\" : true, \"last_name\" : \"last_name\", \"groups\" : [ \"\", \"\" ], \"password\" : \"password\", \"id\" : 5, \"date_joined\" : \"date_joined\", \"first_name\" : \"first_name\", \"email\" : \"email\", \"username\" : \"username\", \"inherited_permissions\" : [ \"inherited_permissions\", \"inherited_permissions\" ] } ] }";
+                    String exampleString = """
+                            {
+                                "count": 1,
+                                "next": null,
+                                "previous": null,
+                                "all": [
+                                    3
+                                ],
+                                "results": [
+                                    {
+                                        "id": 3,
+                                        "username": "demo",
+                                        "email": "demo@localhost",
+                                        "password": "**********",
+                                        "first_name": "",
+                                        "last_name": "",
+                                        "date_joined": "2023-10-13T20:49:13.178865+02:00",
+                                        "is_staff": true,
+                                        "is_active": true,
+                                        "is_superuser": true,
+                                        "groups": [],
+                                        "user_permissions": [],
+                                        "inherited_permissions": [
+                                            "paperless_mail.view_mailrule",
+                                            "sessions.add_session",
+                                            "contenttypes.delete_contenttype",
+                                            "documents.change_tag",
+                                            "documents.view_storagepath",
+                                            "auth.change_permission",
+                                            "documents.change_paperlesstask",
+                                            "django_celery_results.delete_chordcounter",
+                                            "documents.change_documenttype",
+                                            "paperless_mail.delete_processedmail",
+                                            "documents.view_savedview",
+                                            "auth.delete_group",
+                                            "documents.change_savedview",
+                                            "documents.add_uisettings",
+                                            "documents.view_uisettings",
+                                            "auth.change_user",
+                                            "documents.delete_log",
+                                            "documents.add_note",
+                                            "documents.delete_savedview",
+                                            "documents.change_document",
+                                            "paperless_mail.view_processedmail",
+                                            "contenttypes.add_contenttype",
+                                            "documents.change_correspondent",
+                                            "documents.change_log",
+                                            "documents.view_paperlesstask",
+                                            "authtoken.view_token",
+                                            "auth.view_permission",
+                                            "admin.delete_logentry",
+                                            "authtoken.view_tokenproxy",
+                                            "sessions.delete_session",
+                                            "documents.delete_document",
+                                            "documents.delete_note",
+                                            "django_celery_results.add_taskresult",
+                                            "admin.add_logentry",
+                                            "guardian.view_userobjectpermission",
+                                            "documents.change_uisettings",
+                                            "documents.add_log",
+                                            "auth.add_permission",
+                                            "documents.view_savedviewfilterrule",
+                                            "admin.change_logentry",
+                                            "documents.add_storagepath",
+                                            "guardian.add_groupobjectpermission",
+                                            "documents.view_tag",
+                                            "django_celery_results.change_chordcounter",
+                                            "admin.view_logentry",
+                                            "authtoken.add_tokenproxy",
+                                            "django_celery_results.delete_taskresult",
+                                            "sessions.view_session",
+                                            "auth.change_group",
+                                            "documents.change_note",
+                                            "paperless_mail.view_mailaccount",
+                                            "django_celery_results.change_groupresult",
+                                            "documents.delete_paperlesstask",
+                                            "documents.delete_uisettings",
+                                            "documents.add_tag",
+                                            "auth.delete_permission",
+                                            "auth.view_user",
+                                            "paperless_mail.change_processedmail",
+                                            "paperless_mail.change_mailaccount",
+                                            "authtoken.delete_token",
+                                            "guardian.change_groupobjectpermission",
+                                            "authtoken.change_tokenproxy",
+                                            "django_celery_results.view_groupresult",
+                                            "paperless_mail.delete_mailrule",
+                                            "authtoken.change_token",
+                                            "documents.view_correspondent",
+                                            "django_celery_results.delete_groupresult",
+                                            "django_celery_results.view_chordcounter",
+                                            "documents.add_document",
+                                            "documents.delete_savedviewfilterrule",
+                                            "documents.add_savedviewfilterrule",
+                                            "django_celery_results.view_taskresult",
+                                            "guardian.delete_groupobjectpermission",
+                                            "documents.delete_tag",
+                                            "django_celery_results.add_chordcounter",
+                                            "documents.change_storagepath",
+                                            "auth.delete_user",
+                                            "auth.add_group",
+                                            "guardian.delete_userobjectpermission",
+                                            "authtoken.add_token",
+                                            "documents.change_savedviewfilterrule",
+                                            "django_celery_results.change_taskresult",
+                                            "documents.view_note",
+                                            "paperless_mail.delete_mailaccount",
+                                            "guardian.change_userobjectpermission",
+                                            "guardian.add_userobjectpermission",
+                                            "documents.view_document",
+                                            "documents.add_savedview",
+                                            "auth.view_group",
+                                            "auth.add_user",
+                                            "guardian.view_groupobjectpermission",
+                                            "documents.delete_documenttype",
+                                            "contenttypes.change_contenttype",
+                                            "documents.view_documenttype",
+                                            "sessions.change_session",
+                                            "documents.view_log",
+                                            "paperless_mail.add_mailrule",
+                                            "documents.add_paperlesstask",
+                                            "documents.delete_storagepath",
+                                            "authtoken.delete_tokenproxy",
+                                            "contenttypes.view_contenttype",
+                                            "paperless_mail.add_processedmail",
+                                            "documents.add_correspondent",
+                                            "documents.delete_correspondent",
+                                            "paperless_mail.add_mailaccount",
+                                            "documents.add_documenttype",
+                                            "paperless_mail.change_mailrule",
+                                            "django_celery_results.add_groupresult"
+                                        ]
+                                    }
+                                ]
+                            }""";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1545,7 +1679,13 @@ public interface ApiApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"selected_storage_paths\" : [ { \"document_count\" : 6, \"id\" : 0 }, { \"document_count\" : 6, \"id\" : 0 } ], \"selected_document_types\" : [ { \"document_count\" : 6, \"id\" : 0 }, { \"document_count\" : 6, \"id\" : 0 } ], \"selected_correspondents\" : [ { \"document_count\" : 6, \"id\" : 0 }, { \"document_count\" : 6, \"id\" : 0 } ], \"selected_tags\" : [ { \"document_count\" : 6, \"id\" : 0 }, { \"document_count\" : 6, \"id\" : 0 } ] }";
+                    String exampleString = """
+                            {
+                                "selected_correspondents": [],
+                                "selected_tags": [],
+                                "selected_document_types": [],
+                                "selected_storage_paths": []
+                            }""";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1629,7 +1769,7 @@ public interface ApiApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"owner\" : 5, \"matching_algorithm\" : 6, \"user_can_change\" : true, \"document_count\" : 1, \"is_insensitive\" : true, \"name\" : \"name\", \"match\" : \"match\", \"id\" : 0, \"last_correspondence\" : 5, \"slug\" : \"slug\" }";
+                    String exampleString = "{\"count\":0,\"next\":null,\"previous\":null,\"all\":[],\"results\":[]}";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
