@@ -1,19 +1,25 @@
 # Paperless UI
 
-## How to set it up
+## Prerequisites
+Before setting up the Paperless UI, make sure you have the following prerequisites:
+- Docker installed on your system
+- You are in the root folder containing the 'docker-compose.yml' file
 
-Make sure that you are in the root folder(the folder containing the docker-compose file). 
-
-Execute following command:
+## Installation Steps
+1. Navigate to the root folder where the 'docker-compose.yml' file is located
+2. Execute the following command:
 ``` bash
 docker-compose up
 ```
-It will build the Rest-Api and the Paperless UI.
-The Api should be running on ``` Port:8081```. The UI is running on ``` Port:8080``` [http://localhost:8080/en-GB/dashboard](http://localhost:8080/en-GB/dashboard)
+3. This command will build and deploy the Paperless Rest API and the Paperless UI. Once the setup is complete, the Paperless Rest API will be accessible on Port 8081, and the Paperless UI will be available at http://localhost:8080/en-GB/dashboard.
 
 ## Troubleshooting
-If you are having troubles accessing the Paperless UI try deleting the docker containers and clear your docker cache.
+- **Trouble Accessing the Paperless UI:** If you have trouble accessing the Paperless UI, try the following:
+    - Delete the Docker containers by running the following command:
 ``` bash 
 docker builder prune
 ```
-Then retry the process. If you are still having issues, try to delete the cache of your browser. Additionally, it might help to use your native console application.
+After pruning the builder, retry the setup process
+
+- **Browser Cache:** Clear your browser's cache if you still encounter issues. Sometimes, cached data can cause problems.
+- **Native Console Application:** If the issues persist, consider using your system's native console application.
