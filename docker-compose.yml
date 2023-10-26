@@ -20,6 +20,31 @@ services:
         target: /etc/nginx/conf.d/default.conf
     container_name: paperless-ui
 
+  paperless-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: paperless
+      POSTGRES_DB: paperless
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./Paperless_DM.sql:/docker-entrypoint-initdb.d/Paperless_DM.sql
+    container_name: paperless-db
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: paperless-rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
 configs:
   nginx-config:
     file: nginx/nginx.conf
+
+volumes:
+  db-data:
