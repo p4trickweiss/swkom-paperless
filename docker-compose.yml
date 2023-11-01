@@ -22,7 +22,6 @@ services:
 
   paperless-db:
     image: postgres:latest
-    restart: always
     environment:
       POSTGRES_USER: paperless
       POSTGRES_PASSWORD: paperless
