@@ -2,13 +2,24 @@ package at.fhtw.swkom.paperless.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "DocumentsSavedviews")
+@Getter
+@Setter
 public class DocumentsSavedview {
 
     @Id
@@ -40,63 +51,11 @@ public class DocumentsSavedview {
     @Column(nullable = false)
     private Boolean sortReverse;
 
-    @Column
-    private Integer ownerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private AuthUser owner;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public Boolean getShowOnDashboard() {
-        return showOnDashboard;
-    }
-
-    public void setShowOnDashboard(final Boolean showOnDashboard) {
-        this.showOnDashboard = showOnDashboard;
-    }
-
-    public Boolean getShowInSidebar() {
-        return showInSidebar;
-    }
-
-    public void setShowInSidebar(final Boolean showInSidebar) {
-        this.showInSidebar = showInSidebar;
-    }
-
-    public String getSortField() {
-        return sortField;
-    }
-
-    public void setSortField(final String sortField) {
-        this.sortField = sortField;
-    }
-
-    public Boolean getSortReverse() {
-        return sortReverse;
-    }
-
-    public void setSortReverse(final Boolean sortReverse) {
-        this.sortReverse = sortReverse;
-    }
-
-    public Integer getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(final Integer ownerId) {
-        this.ownerId = ownerId;
-    }
+    @OneToMany(mappedBy = "savedView")
+    private Set<DocumentsSavedviewfilterrule> savedViewDocumentsSavedviewfilterrules;
 
 }

@@ -6,9 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "GuardianUserobjectpermissions")
+@Getter
+@Setter
 public class GuardianUserobjectpermission {
 
     @Id
@@ -36,45 +42,5 @@ public class GuardianUserobjectpermission {
 
     @Column(nullable = false)
     private Integer userId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getObjectPk() {
-        return objectPk;
-    }
-
-    public void setObjectPk(final String objectPk) {
-        this.objectPk = objectPk;
-    }
-
-    public Integer getContentTypeId() {
-        return contentTypeId;
-    }
-
-    public void setContentTypeId(final Integer contentTypeId) {
-        this.contentTypeId = contentTypeId;
-    }
-
-    public Integer getPermissionId() {
-        return permissionId;
-    }
-
-    public void setPermissionId(final Integer permissionId) {
-        this.permissionId = permissionId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(final Integer userId) {
-        this.userId = userId;
-    }
 
 }

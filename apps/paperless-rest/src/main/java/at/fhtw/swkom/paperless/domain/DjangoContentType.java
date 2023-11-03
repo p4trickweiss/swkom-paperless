@@ -1,13 +1,20 @@
 package at.fhtw.swkom.paperless.domain;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "DjangoContentTypes")
+@Getter
+@Setter
 public class DjangoContentType {
 
     @Id
@@ -29,29 +36,5 @@ public class DjangoContentType {
 
     @Column(nullable = false, length = 100)
     private String model;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getAppLabel() {
-        return appLabel;
-    }
-
-    public void setAppLabel(final String appLabel) {
-        this.appLabel = appLabel;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(final String model) {
-        this.model = model;
-    }
 
 }

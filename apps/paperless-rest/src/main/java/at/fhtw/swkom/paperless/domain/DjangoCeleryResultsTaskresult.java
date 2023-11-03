@@ -6,10 +6,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "DjangoCeleryResultsTaskresults")
+@Getter
+@Setter
 public class DjangoCeleryResultsTaskresult {
 
     @Id
@@ -67,125 +73,5 @@ public class DjangoCeleryResultsTaskresult {
 
     @Column
     private String periodicTaskName;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(final String taskId) {
-        this.taskId = taskId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(final String status) {
-        this.status = status;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(final String contentType) {
-        this.contentType = contentType;
-    }
-
-    public String getContentEncoding() {
-        return contentEncoding;
-    }
-
-    public void setContentEncoding(final String contentEncoding) {
-        this.contentEncoding = contentEncoding;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(final String result) {
-        this.result = result;
-    }
-
-    public OffsetDateTime getDateDone() {
-        return dateDone;
-    }
-
-    public void setDateDone(final OffsetDateTime dateDone) {
-        this.dateDone = dateDone;
-    }
-
-    public String getTraceback() {
-        return traceback;
-    }
-
-    public void setTraceback(final String traceback) {
-        this.traceback = traceback;
-    }
-
-    public String getMeta() {
-        return meta;
-    }
-
-    public void setMeta(final String meta) {
-        this.meta = meta;
-    }
-
-    public String getTaskArgs() {
-        return taskArgs;
-    }
-
-    public void setTaskArgs(final String taskArgs) {
-        this.taskArgs = taskArgs;
-    }
-
-    public String getTaskKwargs() {
-        return taskKwargs;
-    }
-
-    public void setTaskKwargs(final String taskKwargs) {
-        this.taskKwargs = taskKwargs;
-    }
-
-    public String getTaskName() {
-        return taskName;
-    }
-
-    public void setTaskName(final String taskName) {
-        this.taskName = taskName;
-    }
-
-    public String getWorker() {
-        return worker;
-    }
-
-    public void setWorker(final String worker) {
-        this.worker = worker;
-    }
-
-    public OffsetDateTime getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(final OffsetDateTime dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public String getPeriodicTaskName() {
-        return periodicTaskName;
-    }
-
-    public void setPeriodicTaskName(final String periodicTaskName) {
-        this.periodicTaskName = periodicTaskName;
-    }
 
 }

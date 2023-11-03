@@ -2,13 +2,24 @@ package at.fhtw.swkom.paperless.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "PaperlessMailMailrules")
+@Getter
+@Setter
 public class PaperlessMailMailrule {
 
     @Id
@@ -25,7 +36,7 @@ public class PaperlessMailMailrule {
     )
     private Integer id;
 
-    @Column(nullable = false, unique = true, length = 256)
+    @Column(nullable = false, length = 256)
     private String name;
 
     @Column(nullable = false, length = 256)
@@ -56,18 +67,6 @@ public class PaperlessMailMailrule {
     private Integer assignCorrespondentFrom;
 
     @Column(nullable = false)
-    private Integer accountId;
-
-    @Column
-    private Integer assignCorrespondentId;
-
-    @Column
-    private Integer assignDocumentTypeId;
-
-    @Column(nullable = false, name = "\"order\"")
-    private Integer order;
-
-    @Column(nullable = false)
     private Integer attachmentType;
 
     @Column(length = 256)
@@ -76,170 +75,15 @@ public class PaperlessMailMailrule {
     @Column(nullable = false)
     private Integer consumptionScope;
 
-    @Column
-    private Integer ownerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", nullable = false)
+    private PaperlessMailMailaccount account;
 
-    @Column(length = 256)
-    private String filterTo;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private AuthUser owner;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getFolder() {
-        return folder;
-    }
-
-    public void setFolder(final String folder) {
-        this.folder = folder;
-    }
-
-    public String getFilterFrom() {
-        return filterFrom;
-    }
-
-    public void setFilterFrom(final String filterFrom) {
-        this.filterFrom = filterFrom;
-    }
-
-    public String getFilterSubject() {
-        return filterSubject;
-    }
-
-    public void setFilterSubject(final String filterSubject) {
-        this.filterSubject = filterSubject;
-    }
-
-    public String getFilterBody() {
-        return filterBody;
-    }
-
-    public void setFilterBody(final String filterBody) {
-        this.filterBody = filterBody;
-    }
-
-    public Integer getMaximumAge() {
-        return maximumAge;
-    }
-
-    public void setMaximumAge(final Integer maximumAge) {
-        this.maximumAge = maximumAge;
-    }
-
-    public Integer getAction() {
-        return action;
-    }
-
-    public void setAction(final Integer action) {
-        this.action = action;
-    }
-
-    public String getActionParameter() {
-        return actionParameter;
-    }
-
-    public void setActionParameter(final String actionParameter) {
-        this.actionParameter = actionParameter;
-    }
-
-    public Integer getAssignTitleFrom() {
-        return assignTitleFrom;
-    }
-
-    public void setAssignTitleFrom(final Integer assignTitleFrom) {
-        this.assignTitleFrom = assignTitleFrom;
-    }
-
-    public Integer getAssignCorrespondentFrom() {
-        return assignCorrespondentFrom;
-    }
-
-    public void setAssignCorrespondentFrom(final Integer assignCorrespondentFrom) {
-        this.assignCorrespondentFrom = assignCorrespondentFrom;
-    }
-
-    public Integer getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(final Integer accountId) {
-        this.accountId = accountId;
-    }
-
-    public Integer getAssignCorrespondentId() {
-        return assignCorrespondentId;
-    }
-
-    public void setAssignCorrespondentId(final Integer assignCorrespondentId) {
-        this.assignCorrespondentId = assignCorrespondentId;
-    }
-
-    public Integer getAssignDocumentTypeId() {
-        return assignDocumentTypeId;
-    }
-
-    public void setAssignDocumentTypeId(final Integer assignDocumentTypeId) {
-        this.assignDocumentTypeId = assignDocumentTypeId;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(final Integer order) {
-        this.order = order;
-    }
-
-    public Integer getAttachmentType() {
-        return attachmentType;
-    }
-
-    public void setAttachmentType(final Integer attachmentType) {
-        this.attachmentType = attachmentType;
-    }
-
-    public String getFilterAttachmentFilename() {
-        return filterAttachmentFilename;
-    }
-
-    public void setFilterAttachmentFilename(final String filterAttachmentFilename) {
-        this.filterAttachmentFilename = filterAttachmentFilename;
-    }
-
-    public Integer getConsumptionScope() {
-        return consumptionScope;
-    }
-
-    public void setConsumptionScope(final Integer consumptionScope) {
-        this.consumptionScope = consumptionScope;
-    }
-
-    public Integer getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(final Integer ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public String getFilterTo() {
-        return filterTo;
-    }
-
-    public void setFilterTo(final String filterTo) {
-        this.filterTo = filterTo;
-    }
+    @OneToMany(mappedBy = "mailrule")
+    private Set<PaperlessMailMailruleAssignTags> mailrulePaperlessMailMailruleAssignTagses;
 
 }

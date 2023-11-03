@@ -3,10 +3,16 @@ package at.fhtw.swkom.paperless.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "DjangoSessions")
+@Getter
+@Setter
 public class DjangoSession {
 
     @Id
@@ -18,29 +24,5 @@ public class DjangoSession {
 
     @Column(nullable = false)
     private OffsetDateTime expireDate;
-
-    public String getSessionKey() {
-        return sessionKey;
-    }
-
-    public void setSessionKey(final String sessionKey) {
-        this.sessionKey = sessionKey;
-    }
-
-    public String getSessionData() {
-        return sessionData;
-    }
-
-    public void setSessionData(final String sessionData) {
-        this.sessionData = sessionData;
-    }
-
-    public OffsetDateTime getExpireDate() {
-        return expireDate;
-    }
-
-    public void setExpireDate(final OffsetDateTime expireDate) {
-        this.expireDate = expireDate;
-    }
 
 }

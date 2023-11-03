@@ -1,6 +1,6 @@
-package io.bootify.my_app.repos;
+package at.fhtw.swkom.paperless.repos;
 
-import io.bootify.my_app.domain.DocumentsNote;
+import at.fhtw.swkom.paperless.domain.DocumentsNote;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

@@ -6,9 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "DjangoCeleryResultsChordcounters")
+@Getter
+@Setter
 public class DjangoCeleryResultsChordcounter {
 
     @Id
@@ -33,37 +39,5 @@ public class DjangoCeleryResultsChordcounter {
 
     @Column(nullable = false)
     private Integer count;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(final String groupId) {
-        this.groupId = groupId;
-    }
-
-    public String getSubTasks() {
-        return subTasks;
-    }
-
-    public void setSubTasks(final String subTasks) {
-        this.subTasks = subTasks;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(final Integer count) {
-        this.count = count;
-    }
 
 }

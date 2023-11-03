@@ -6,10 +6,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "DjangoCeleryResultsGroupresults")
+@Getter
+@Setter
 public class DjangoCeleryResultsGroupresult {
 
     @Id
@@ -43,61 +49,5 @@ public class DjangoCeleryResultsGroupresult {
 
     @Column(columnDefinition = "text")
     private String result;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(final String groupId) {
-        this.groupId = groupId;
-    }
-
-    public OffsetDateTime getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(final OffsetDateTime dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public OffsetDateTime getDateDone() {
-        return dateDone;
-    }
-
-    public void setDateDone(final OffsetDateTime dateDone) {
-        this.dateDone = dateDone;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(final String contentType) {
-        this.contentType = contentType;
-    }
-
-    public String getContentEncoding() {
-        return contentEncoding;
-    }
-
-    public void setContentEncoding(final String contentEncoding) {
-        this.contentEncoding = contentEncoding;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(final String result) {
-        this.result = result;
-    }
 
 }

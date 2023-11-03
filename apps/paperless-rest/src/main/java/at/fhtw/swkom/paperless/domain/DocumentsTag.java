@@ -2,13 +2,22 @@ package at.fhtw.swkom.paperless.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "DocumentsTags")
+@Getter
+@Setter
 public class DocumentsTag {
 
     @Id
@@ -43,71 +52,8 @@ public class DocumentsTag {
     @Column(nullable = false, length = 7)
     private String color;
 
-    @Column
-    private Integer ownerId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getMatch() {
-        return match;
-    }
-
-    public void setMatch(final String match) {
-        this.match = match;
-    }
-
-    public Integer getMatchingAlgorithm() {
-        return matchingAlgorithm;
-    }
-
-    public void setMatchingAlgorithm(final Integer matchingAlgorithm) {
-        this.matchingAlgorithm = matchingAlgorithm;
-    }
-
-    public Boolean getIsInsensitive() {
-        return isInsensitive;
-    }
-
-    public void setIsInsensitive(final Boolean isInsensitive) {
-        this.isInsensitive = isInsensitive;
-    }
-
-    public Boolean getIsInboxTag() {
-        return isInboxTag;
-    }
-
-    public void setIsInboxTag(final Boolean isInboxTag) {
-        this.isInboxTag = isInboxTag;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(final String color) {
-        this.color = color;
-    }
-
-    public Integer getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(final Integer ownerId) {
-        this.ownerId = ownerId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private AuthUser owner;
 
 }

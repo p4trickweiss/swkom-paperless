@@ -2,13 +2,22 @@ package at.fhtw.swkom.paperless.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "AuthUserUserPermissionses")
+@Getter
+@Setter
 public class AuthUserUserPermissions {
 
     @Id
@@ -25,34 +34,8 @@ public class AuthUserUserPermissions {
     )
     private Integer id;
 
-    @Column(nullable = false)
-    private Integer userId;
-
-    @Column(nullable = false)
-    private Integer permissionId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(final Integer userId) {
-        this.userId = userId;
-    }
-
-    public Integer getPermissionId() {
-        return permissionId;
-    }
-
-    public void setPermissionId(final Integer permissionId) {
-        this.permissionId = permissionId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private AuthUser user;
 
 }

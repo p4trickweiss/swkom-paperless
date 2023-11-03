@@ -6,10 +6,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "DjangoAdminLogs")
+@Getter
+@Setter
 public class DjangoAdminLog {
 
     @Id
@@ -46,69 +52,5 @@ public class DjangoAdminLog {
 
     @Column(nullable = false)
     private Integer userId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public OffsetDateTime getActionTime() {
-        return actionTime;
-    }
-
-    public void setActionTime(final OffsetDateTime actionTime) {
-        this.actionTime = actionTime;
-    }
-
-    public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(final String objectId) {
-        this.objectId = objectId;
-    }
-
-    public String getObjectRepr() {
-        return objectRepr;
-    }
-
-    public void setObjectRepr(final String objectRepr) {
-        this.objectRepr = objectRepr;
-    }
-
-    public Integer getActionFlag() {
-        return actionFlag;
-    }
-
-    public void setActionFlag(final Integer actionFlag) {
-        this.actionFlag = actionFlag;
-    }
-
-    public String getChangeMessage() {
-        return changeMessage;
-    }
-
-    public void setChangeMessage(final String changeMessage) {
-        this.changeMessage = changeMessage;
-    }
-
-    public Integer getContentTypeId() {
-        return contentTypeId;
-    }
-
-    public void setContentTypeId(final Integer contentTypeId) {
-        this.contentTypeId = contentTypeId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(final Integer userId) {
-        this.userId = userId;
-    }
 
 }

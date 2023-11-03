@@ -2,14 +2,23 @@ package at.fhtw.swkom.paperless.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "PaperlessMailProcessedmails")
+@Getter
+@Setter
 public class PaperlessMailProcessedmail {
 
     @Id
@@ -47,90 +56,8 @@ public class PaperlessMailProcessedmail {
     @Column(columnDefinition = "text")
     private String error;
 
-    @Column
-    private Integer ownerId;
-
-    @Column(nullable = false)
-    private Integer ruleId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getFolder() {
-        return folder;
-    }
-
-    public void setFolder(final String folder) {
-        this.folder = folder;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(final String uid) {
-        this.uid = uid;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(final String subject) {
-        this.subject = subject;
-    }
-
-    public OffsetDateTime getReceived() {
-        return received;
-    }
-
-    public void setReceived(final OffsetDateTime received) {
-        this.received = received;
-    }
-
-    public OffsetDateTime getProcessed() {
-        return processed;
-    }
-
-    public void setProcessed(final OffsetDateTime processed) {
-        this.processed = processed;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(final String status) {
-        this.status = status;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(final String error) {
-        this.error = error;
-    }
-
-    public Integer getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(final Integer ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public Integer getRuleId() {
-        return ruleId;
-    }
-
-    public void setRuleId(final Integer ruleId) {
-        this.ruleId = ruleId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private AuthUser owner;
 
 }

@@ -5,11 +5,19 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
+import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "AuthUsers")
+@Getter
+@Setter
 public class AuthUser {
 
     @Id
@@ -35,7 +43,7 @@ public class AuthUser {
     @Column(nullable = false)
     private Boolean isSuperuser;
 
-    @Column(nullable = false, unique = true, length = 150)
+    @Column(nullable = false, length = 150)
     private String username;
 
     @Column(nullable = false, length = 150)
@@ -56,92 +64,43 @@ public class AuthUser {
     @Column(nullable = false)
     private OffsetDateTime dateJoined;
 
-    public Integer getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "user")
+    private Set<AuthUserGroups> userAuthUserGroupses;
 
-    public void setId(final Integer id) {
-        this.id = id;
-    }
+    @OneToMany(mappedBy = "owner")
+    private Set<DocumentsCorrespondent> ownerDocumentsCorrespondents;
 
-    public String getPassword() {
-        return password;
-    }
+    @OneToMany(mappedBy = "owner")
+    private Set<DocumentsDocumenttype> ownerDocumentsDocumenttypes;
 
-    public void setPassword(final String password) {
-        this.password = password;
-    }
+    @OneToMany(mappedBy = "owner")
+    private Set<DocumentsStoragepath> ownerDocumentsStoragepaths;
 
-    public OffsetDateTime getLastLogin() {
-        return lastLogin;
-    }
+    @OneToMany(mappedBy = "owner")
+    private Set<DocumentsTag> ownerDocumentsTags;
 
-    public void setLastLogin(final OffsetDateTime lastLogin) {
-        this.lastLogin = lastLogin;
-    }
+    @OneToMany(mappedBy = "user")
+    private Set<DocumentsUisettings> userDocumentsUisettingses;
 
-    public Boolean getIsSuperuser() {
-        return isSuperuser;
-    }
+    @OneToMany(mappedBy = "owner")
+    private Set<DocumentsSavedview> ownerDocumentsSavedviews;
 
-    public void setIsSuperuser(final Boolean isSuperuser) {
-        this.isSuperuser = isSuperuser;
-    }
+    @OneToMany(mappedBy = "owner")
+    private Set<PaperlessMailMailaccount> ownerPaperlessMailMailaccounts;
 
-    public String getUsername() {
-        return username;
-    }
+    @OneToMany(mappedBy = "owner")
+    private Set<DocumentsDocument> ownerDocumentsDocuments;
 
-    public void setUsername(final String username) {
-        this.username = username;
-    }
+    @OneToMany(mappedBy = "owner")
+    private Set<PaperlessMailMailrule> ownerPaperlessMailMailrules;
 
-    public String getFirstName() {
-        return firstName;
-    }
+    @OneToMany(mappedBy = "user")
+    private Set<AuthUserUserPermissions> userAuthUserUserPermissionses;
 
-    public void setFirstName(final String firstName) {
-        this.firstName = firstName;
-    }
+    @OneToMany(mappedBy = "user")
+    private Set<AuthtokenToken> userAuthtokenTokens;
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(final String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(final String email) {
-        this.email = email;
-    }
-
-    public Boolean getIsStaff() {
-        return isStaff;
-    }
-
-    public void setIsStaff(final Boolean isStaff) {
-        this.isStaff = isStaff;
-    }
-
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(final Boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    public OffsetDateTime getDateJoined() {
-        return dateJoined;
-    }
-
-    public void setDateJoined(final OffsetDateTime dateJoined) {
-        this.dateJoined = dateJoined;
-    }
+    @OneToMany(mappedBy = "owner")
+    private Set<PaperlessMailProcessedmail> ownerPaperlessMailProcessedmails;
 
 }

@@ -2,14 +2,23 @@ package at.fhtw.swkom.paperless.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "DocumentsNotes")
+@Getter
+@Setter
 public class DocumentsNote {
 
     @Id
@@ -32,50 +41,8 @@ public class DocumentsNote {
     @Column(nullable = false)
     private OffsetDateTime created;
 
-    @Column
-    private Integer documentId;
-
-    @Column
-    private Integer userId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(final String note) {
-        this.note = note;
-    }
-
-    public OffsetDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(final OffsetDateTime created) {
-        this.created = created;
-    }
-
-    public Integer getDocumentId() {
-        return documentId;
-    }
-
-    public void setDocumentId(final Integer documentId) {
-        this.documentId = documentId;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(final Integer userId) {
-        this.userId = userId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "document_id")
+    private DocumentsDocument document;
 
 }

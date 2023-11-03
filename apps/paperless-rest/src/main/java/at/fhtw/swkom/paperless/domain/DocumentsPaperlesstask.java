@@ -6,10 +6,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "DocumentsPaperlesstasks")
+@Getter
+@Setter
 public class DocumentsPaperlesstask {
 
     @Id
@@ -26,7 +32,7 @@ public class DocumentsPaperlesstask {
     )
     private Integer id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String taskId;
 
     @Column(nullable = false)
@@ -52,85 +58,5 @@ public class DocumentsPaperlesstask {
 
     @Column
     private String taskName;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(final String taskId) {
-        this.taskId = taskId;
-    }
-
-    public Boolean getAcknowledged() {
-        return acknowledged;
-    }
-
-    public void setAcknowledged(final Boolean acknowledged) {
-        this.acknowledged = acknowledged;
-    }
-
-    public OffsetDateTime getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(final OffsetDateTime dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public OffsetDateTime getDateDone() {
-        return dateDone;
-    }
-
-    public void setDateDone(final OffsetDateTime dateDone) {
-        this.dateDone = dateDone;
-    }
-
-    public OffsetDateTime getDateStarted() {
-        return dateStarted;
-    }
-
-    public void setDateStarted(final OffsetDateTime dateStarted) {
-        this.dateStarted = dateStarted;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(final String result) {
-        this.result = result;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(final String status) {
-        this.status = status;
-    }
-
-    public String getTaskFileName() {
-        return taskFileName;
-    }
-
-    public void setTaskFileName(final String taskFileName) {
-        this.taskFileName = taskFileName;
-    }
-
-    public String getTaskName() {
-        return taskName;
-    }
-
-    public void setTaskName(final String taskName) {
-        this.taskName = taskName;
-    }
 
 }

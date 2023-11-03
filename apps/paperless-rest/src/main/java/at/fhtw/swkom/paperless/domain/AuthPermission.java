@@ -6,9 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "AuthPermissions")
+@Getter
+@Setter
 public class AuthPermission {
 
     @Id
@@ -28,42 +34,10 @@ public class AuthPermission {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private Integer contentTypeId;
+    @Column(nullable = false, length = 100)
+    private String contentType;
 
     @Column(nullable = false, length = 100)
     private String codename;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public Integer getContentTypeId() {
-        return contentTypeId;
-    }
-
-    public void setContentTypeId(final Integer contentTypeId) {
-        this.contentTypeId = contentTypeId;
-    }
-
-    public String getCodename() {
-        return codename;
-    }
-
-    public void setCodename(final String codename) {
-        this.codename = codename;
-    }
 
 }

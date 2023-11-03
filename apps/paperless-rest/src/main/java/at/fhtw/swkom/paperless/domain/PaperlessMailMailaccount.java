@@ -2,13 +2,24 @@ package at.fhtw.swkom.paperless.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "PaperlessMailMailaccounts")
+@Getter
+@Setter
 public class PaperlessMailMailaccount {
 
     @Id
@@ -25,7 +36,7 @@ public class PaperlessMailMailaccount {
     )
     private Integer id;
 
-    @Column(nullable = false, unique = true, length = 256)
+    @Column(nullable = false, length = 256)
     private String name;
 
     @Column(nullable = false, length = 256)
@@ -46,90 +57,11 @@ public class PaperlessMailMailaccount {
     @Column(nullable = false, length = 256)
     private String characterSet;
 
-    @Column
-    private Integer ownerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private AuthUser owner;
 
-    @Column(nullable = false)
-    private Boolean isToken;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getImapServer() {
-        return imapServer;
-    }
-
-    public void setImapServer(final String imapServer) {
-        this.imapServer = imapServer;
-    }
-
-    public Integer getImapPort() {
-        return imapPort;
-    }
-
-    public void setImapPort(final Integer imapPort) {
-        this.imapPort = imapPort;
-    }
-
-    public Integer getImapSecurity() {
-        return imapSecurity;
-    }
-
-    public void setImapSecurity(final Integer imapSecurity) {
-        this.imapSecurity = imapSecurity;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(final String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(final String password) {
-        this.password = password;
-    }
-
-    public String getCharacterSet() {
-        return characterSet;
-    }
-
-    public void setCharacterSet(final String characterSet) {
-        this.characterSet = characterSet;
-    }
-
-    public Integer getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(final Integer ownerId) {
-        this.ownerId = ownerId;
-    }
-
-    public Boolean getIsToken() {
-        return isToken;
-    }
-
-    public void setIsToken(final Boolean isToken) {
-        this.isToken = isToken;
-    }
+    @OneToMany(mappedBy = "account")
+    private Set<PaperlessMailMailrule> accountPaperlessMailMailrules;
 
 }

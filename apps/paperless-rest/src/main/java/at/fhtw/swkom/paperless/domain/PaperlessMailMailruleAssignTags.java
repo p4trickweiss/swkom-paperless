@@ -2,13 +2,22 @@ package at.fhtw.swkom.paperless.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "PaperlessMailMailruleAssignTagses")
+@Getter
+@Setter
 public class PaperlessMailMailruleAssignTags {
 
     @Id
@@ -25,34 +34,8 @@ public class PaperlessMailMailruleAssignTags {
     )
     private Integer id;
 
-    @Column(nullable = false)
-    private Integer mailruleId;
-
-    @Column(nullable = false)
-    private Integer tagId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public Integer getMailruleId() {
-        return mailruleId;
-    }
-
-    public void setMailruleId(final Integer mailruleId) {
-        this.mailruleId = mailruleId;
-    }
-
-    public Integer getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(final Integer tagId) {
-        this.tagId = tagId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mailrule_id", nullable = false)
+    private PaperlessMailMailrule mailrule;
 
 }

@@ -2,13 +2,24 @@ package at.fhtw.swkom.paperless.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "DocumentsStoragepaths")
+@Getter
+@Setter
 public class DocumentsStoragepath {
 
     @Id
@@ -40,63 +51,11 @@ public class DocumentsStoragepath {
     @Column(nullable = false, length = 512)
     private String path;
 
-    @Column
-    private Integer ownerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private AuthUser owner;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getMatch() {
-        return match;
-    }
-
-    public void setMatch(final String match) {
-        this.match = match;
-    }
-
-    public Integer getMatchingAlgorithm() {
-        return matchingAlgorithm;
-    }
-
-    public void setMatchingAlgorithm(final Integer matchingAlgorithm) {
-        this.matchingAlgorithm = matchingAlgorithm;
-    }
-
-    public Boolean getIsInsensitive() {
-        return isInsensitive;
-    }
-
-    public void setIsInsensitive(final Boolean isInsensitive) {
-        this.isInsensitive = isInsensitive;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(final String path) {
-        this.path = path;
-    }
-
-    public Integer getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(final Integer ownerId) {
-        this.ownerId = ownerId;
-    }
+    @OneToMany(mappedBy = "storagePath")
+    private Set<DocumentsDocument> storagePathDocumentsDocuments;
 
 }

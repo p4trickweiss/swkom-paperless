@@ -2,13 +2,22 @@ package at.fhtw.swkom.paperless.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "DocumentsDocumentTagses")
+@Getter
+@Setter
 public class DocumentsDocumentTags {
 
     @Id
@@ -25,34 +34,8 @@ public class DocumentsDocumentTags {
     )
     private Integer id;
 
-    @Column(nullable = false)
-    private Integer documentId;
-
-    @Column(nullable = false)
-    private Integer tagId;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public Integer getDocumentId() {
-        return documentId;
-    }
-
-    public void setDocumentId(final Integer documentId) {
-        this.documentId = documentId;
-    }
-
-    public Integer getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(final Integer tagId) {
-        this.tagId = tagId;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "document_id", nullable = false)
+    private DocumentsDocument document;
 
 }

@@ -6,10 +6,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
+@Table(name = "DjangoMigrationses")
+@Getter
+@Setter
 public class DjangoMigrations {
 
     @Id
@@ -34,37 +40,5 @@ public class DjangoMigrations {
 
     @Column(nullable = false)
     private OffsetDateTime applied;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(final Integer id) {
-        this.id = id;
-    }
-
-    public String getApp() {
-        return app;
-    }
-
-    public void setApp(final String app) {
-        this.app = app;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public OffsetDateTime getApplied() {
-        return applied;
-    }
-
-    public void setApplied(final OffsetDateTime applied) {
-        this.applied = applied;
-    }
 
 }
