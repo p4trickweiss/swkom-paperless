@@ -84,6 +84,6 @@ public class PaperlessMailMailrule {
     private AuthUser owner;
 
     @OneToMany(mappedBy = "mailrule")
-    private Set<PaperlessMailMailruleAssignTags> mailrulePaperlessMailMailruleAssignTagses;
+    private Set<PaperlessMailMailruleAssignTags> mailrulePaperlessMailMailruleAssignTags;
 
 }

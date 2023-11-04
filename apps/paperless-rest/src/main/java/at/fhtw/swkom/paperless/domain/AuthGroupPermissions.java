@@ -15,7 +15,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "AuthGroupPermissionses")
+@Table(name = "AuthGroupPermissions")
 @Getter
 @Setter
 public class AuthGroupPermissions {

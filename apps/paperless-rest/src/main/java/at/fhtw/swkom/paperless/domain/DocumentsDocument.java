@@ -87,6 +87,6 @@ public class DocumentsDocument {
     private Set<DocumentsNote> documentDocumentsNotes;
 
     @OneToMany(mappedBy = "document")
-    private Set<DocumentsDocumentTags> documentDocumentsDocumentTagses;
+    private Set<DocumentsDocumentTags> documentDocumentsDocumentTags;
 
 }

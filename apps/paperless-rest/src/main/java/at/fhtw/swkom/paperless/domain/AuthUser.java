@@ -65,7 +65,7 @@ public class AuthUser {
     private OffsetDateTime dateJoined;
 
     @OneToMany(mappedBy = "user")
-    private Set<AuthUserGroups> userAuthUserGroupses;
+    private Set<AuthUserGroups> userAuthUserGroups;
 
     @OneToMany(mappedBy = "owner")
     private Set<DocumentsCorrespondent> ownerDocumentsCorrespondents;
@@ -80,7 +80,7 @@ public class AuthUser {
     private Set<DocumentsTag> ownerDocumentsTags;
 
     @OneToMany(mappedBy = "user")
-    private Set<DocumentsUisettings> userDocumentsUisettingses;
+    private Set<DocumentsUisettings> userDocumentsUisettings;
 
     @OneToMany(mappedBy = "owner")
     private Set<DocumentsSavedview> ownerDocumentsSavedviews;
@@ -95,7 +95,7 @@ public class AuthUser {
     private Set<PaperlessMailMailrule> ownerPaperlessMailMailrules;
 
     @OneToMany(mappedBy = "user")
-    private Set<AuthUserUserPermissions> userAuthUserUserPermissionses;
+    private Set<AuthUserUserPermissions> userAuthUserUserPermissions;
 
     @OneToMany(mappedBy = "user")
     private Set<AuthtokenToken> userAuthtokenTokens;

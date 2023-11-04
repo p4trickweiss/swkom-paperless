@@ -15,7 +15,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "DocumentsUisettingses")
+@Table(name = "DocumentsUisettings")
 @Getter
 @Setter
 public class DocumentsUisettings {

@@ -13,7 +13,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "DjangoMigrationses")
+@Table(name = "DjangoMigrations")
 @Getter
 @Setter
 public class DjangoMigrations {

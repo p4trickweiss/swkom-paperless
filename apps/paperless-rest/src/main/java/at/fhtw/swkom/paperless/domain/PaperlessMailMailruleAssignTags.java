@@ -15,7 +15,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "PaperlessMailMailruleAssignTagses")
+@Table(name = "PaperlessMailMailruleAssignTags")
 @Getter
 @Setter
 public class PaperlessMailMailruleAssignTags {

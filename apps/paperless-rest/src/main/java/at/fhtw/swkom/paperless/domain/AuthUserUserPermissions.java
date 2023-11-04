@@ -15,7 +15,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "AuthUserUserPermissionses")
+@Table(name = "AuthUserUserPermissions")
 @Getter
 @Setter
 public class AuthUserUserPermissions {

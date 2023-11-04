@@ -15,7 +15,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "DocumentsDocumentTagses")
+@Table(name = "DocumentsDocumentTags")
 @Getter
 @Setter
 public class DocumentsDocumentTags {

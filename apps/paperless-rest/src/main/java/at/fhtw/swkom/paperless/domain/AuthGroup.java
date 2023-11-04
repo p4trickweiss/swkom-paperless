@@ -37,6 +37,6 @@ public class AuthGroup {
     private String name;
 
     @OneToMany(mappedBy = "group")
-    private Set<AuthGroupPermissions> groupAuthGroupPermissionses;
+    private Set<AuthGroupPermissions> groupAuthGroupPermissions;
 
 }
