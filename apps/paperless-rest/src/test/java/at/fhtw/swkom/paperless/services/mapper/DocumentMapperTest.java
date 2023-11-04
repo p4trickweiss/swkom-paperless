@@ -17,6 +17,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DocumentMapperTest {
+
     @Test
     void testEntityToDto() {
         Integer id = 1;
@@ -163,5 +164,7 @@ public class DocumentMapperTest {
         System.out.println(documentsDocument);
 
         // assertEquals(expextedDocumentsDocument, documentsDocument);
+
     }
+
 }
