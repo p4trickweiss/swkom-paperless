@@ -1,6 +1,7 @@
 package at.fhtw.swkom.paperless.services.mapper;
 
 import at.fhtw.swkom.paperless.domain.DocumentsCorrespondent;
+import at.fhtw.swkom.paperless.domain.DocumentsTag;
 import at.fhtw.swkom.paperless.mapper.DtoEntitiyMapperImpl;
 import at.fhtw.swkom.paperless.services.dto.Correspondent;
 import io.swagger.v3.core.util.Json;
@@ -62,5 +63,34 @@ class DtoEntitiyMapperTest {
 
     @Test
     void dtoToEntity() {
+        // expected Entity(Document Correspondent)
+        DocumentsCorrespondent expectedCorrespondent = new DocumentsCorrespondent();
+        expectedCorrespondent.setName(name);
+        expectedCorrespondent.setMatch(match);
+        expectedCorrespondent.setId(id);
+        expectedCorrespondent.setIsInsensitive(isInsensitive);
+        expectedCorrespondent.setMatchingAlgorithm(matchingAlgorithmn);
+
+        // input dto
+        Correspondent correspondentDtoInput = new Correspondent();
+        correspondentDtoInput.setId(Long.valueOf(id));
+        //correspondentDtoInput.setLastCorrespondence(lastCorrespondance);
+        correspondentDtoInput.setName(JsonNullable.of(name));
+        correspondentDtoInput.setMatch(JsonNullable.of(match));
+        //correspondentDtoInput.setSlug(JsonNullable.of(slug));
+        //correspondentDtoInput.setDocumentCount(Long.valueOf(documentCount));
+        correspondentDtoInput.setIsInsensitive(isInsensitive);
+        correspondentDtoInput.setMatchingAlgorithm(Long.valueOf(matchingAlgorithmn));
+
+        DtoEntitiyMapperImpl documentsTagImpl = new DtoEntitiyMapperImpl();
+        DocumentsCorrespondent correspondentEntityOutput = documentsTagImpl.dtoToEntity(correspondentDtoInput);
+
+        System.out.println("Expected -----------------");
+        System.out.println(expectedCorrespondent);
+
+        System.out.println("Actual -----------------");
+        System.out.println(correspondentEntityOutput);
+
+        assertEquals(expectedCorrespondent.toString(), correspondentEntityOutput.toString());
     }
 }
