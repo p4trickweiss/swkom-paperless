@@ -28,7 +28,7 @@ public interface DtoEntitiyMapper extends JsonNullableMapper {
 
     //Document Types
     DocumentType entityToDto(DocumentsDocumenttype documentType);
-    DocumentType dtoToEntity(DocumentsDocumenttype documentsDocumenttype);
+    DocumentsDocumenttype dtoToEntity(DocumentType documentType);
 
 
 }
