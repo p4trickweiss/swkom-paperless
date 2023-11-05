@@ -13,6 +13,8 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
 import java.util.Set;
+
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,6 +40,7 @@ public class DocumentsDocument {
     private Integer id;
 
     @Column(nullable = false, length = 128)
+    @NotNull
     private String title;
 
     @Column(nullable = false, columnDefinition = "text")
