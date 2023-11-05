@@ -67,6 +67,9 @@ public class DocumentsDocument {
     @Column(length = 1024)
     private String archiveFilename;
 
+    @Column(length = 1024)
+    private String originalFileName;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "correspondent_id", nullable = false)
     private DocumentsCorrespondent correspondent;
