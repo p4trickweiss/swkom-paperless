@@ -92,4 +92,25 @@ public class DocumentsDocument {
     @OneToMany(mappedBy = "document")
     private Set<DocumentsDocumentTags> documentDocumentsDocumentTags;
 
+    @Override
+    public String toString() {
+        return "DocumentsDocument{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", created=" + created +
+                ", modified=" + modified +
+                ", added=" + added +
+                ", storageType='" + storageType + '\'' +
+                ", filename='" + filename + '\'' +
+                ", archiveSerialNumber=" + archiveSerialNumber +
+                ", archiveChecksum='" + archiveChecksum + '\'' +
+                ", archiveFilename='" + archiveFilename + '\'' +
+                ", originalFileName='" + originalFileName + '\'' +
+                ", correspondent=" + correspondent +
+                ", documentType=" + documentType +
+                ", storagePath=" + storagePath +
+                ", owner=" + owner +
+                '}';
+    }
 }

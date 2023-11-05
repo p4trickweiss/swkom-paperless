@@ -56,4 +56,17 @@ public class DocumentsTag {
     @JoinColumn(name = "owner_id")
     private AuthUser owner;
 
+    @Override
+    public String toString() {
+        return "DocumentsTag{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", match='" + match + '\'' +
+                ", matchingAlgorithm=" + matchingAlgorithm +
+                ", isInsensitive=" + isInsensitive +
+                ", isInboxTag=" + isInboxTag +
+                ", color='" + color + '\'' +
+                ", owner=" + owner +
+                '}';
+    }
 }

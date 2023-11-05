@@ -121,8 +121,8 @@ public class DocumentMapperTest {
         documentDto.setModified(modified);
         documentDto.setAdded(added);
         documentDto.setArchiveSerialNumber(JsonNullable.of(archiveSerialNumber));
-        documentDto.setArchivedFileName(JsonNullable.of(archivedFileName));
-        documentDto.setOriginalFileName(JsonNullable.of(originalFileName));
+        //documentDto.setArchivedFileName(JsonNullable.of(archivedFileName));
+        //documentDto.setOriginalFileName(JsonNullable.of(originalFileName));
 
         // TODO:
         /*
@@ -133,15 +133,15 @@ public class DocumentMapperTest {
         documentDto.setCreatedDate(createdDate);
          */
 
-        DocumentsDocument expextedDocumentsDocument = new DocumentsDocument();
-        expextedDocumentsDocument.setId(id);
-        expextedDocumentsDocument.setTitle(title);
-        expextedDocumentsDocument.setContent(content);
-        expextedDocumentsDocument.setCreated(created);
-        expextedDocumentsDocument.setModified(modified);
-        expextedDocumentsDocument.setAdded(added);
-        expextedDocumentsDocument.setArchiveSerialNumber(Integer.valueOf(archiveSerialNumber));
-        expextedDocumentsDocument.setArchiveFilename(archivedFileName);
+        DocumentsDocument expectedDocumentsDocument = new DocumentsDocument();
+        expectedDocumentsDocument.setId(id);
+        expectedDocumentsDocument.setTitle(title);
+        expectedDocumentsDocument.setContent(content);
+        expectedDocumentsDocument.setCreated(created);
+        expectedDocumentsDocument.setModified(modified);
+        expectedDocumentsDocument.setAdded(added);
+        expectedDocumentsDocument.setArchiveSerialNumber(Integer.valueOf(archiveSerialNumber));
+        //expectedDocumentsDocument.setArchiveFilename(archivedFileName);
 
         // TODO:
         /*
@@ -162,12 +162,12 @@ public class DocumentMapperTest {
         DocumentsDocument documentsDocument = documentMapperImpl.dtoToEntity(documentDto);
 
         System.out.println("Expected -----------------");
-        System.out.println(expextedDocumentsDocument);
+        System.out.println(expectedDocumentsDocument);
 
         System.out.println("Actual -----------------");
         System.out.println(documentsDocument);
 
-        // assertEquals(expextedDocumentsDocument, documentsDocument);
+        assertEquals(expectedDocumentsDocument, documentsDocument);
 
     }
 

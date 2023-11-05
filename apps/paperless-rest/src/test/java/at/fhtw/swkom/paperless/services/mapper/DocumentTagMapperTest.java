@@ -11,15 +11,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DocumentTagMapperTest {
 
+    //attributes
+    Integer id = 1;
+    Boolean isInboxTag = true;
+    String match = "Match";
+    String color = "yellow";
+    String name = "Obi Wan";
+    Boolean isInsensitive = true;
     @Test
     void entityToDto() {
-        //attributes
-        Integer id = 1;
-        Boolean isInboxTag = true;
-        String match = "Match";
-        String color = "yellow";
-        String name = "Obi Wan";
-        Boolean isInsensitive = true;
 
         //set Entity
         DocumentsTag documentsTag = new DocumentsTag();
@@ -55,5 +55,35 @@ class DocumentTagMapperTest {
 
     @Test
     void dtoToEntity() {
+
+        //set Dto
+        DocTag docTag = new DocTag();
+        docTag.setId(Long.valueOf(id));
+        docTag.setIsInboxTag(true);
+        docTag.setMatch(JsonNullable.of(match));
+        docTag.setColor(JsonNullable.of(color));
+        docTag.setName(JsonNullable.of(name));
+        docTag.setIsInsensitive(isInsensitive);
+
+        //set testEntity
+        DocumentsTag expectedDocumentsTag = new DocumentsTag();
+        expectedDocumentsTag.setId(id);
+        expectedDocumentsTag.setIsInboxTag(isInboxTag);
+        expectedDocumentsTag.setMatch(match);
+        expectedDocumentsTag.setColor(color);
+        expectedDocumentsTag.setName(name);
+        expectedDocumentsTag.setIsInsensitive(isInsensitive);
+
+        //test
+        DtoEntitiyMapperImpl documentsTagImpl = new DtoEntitiyMapperImpl();
+        DocumentsTag documentsTag = documentsTagImpl.dtoToEntity(docTag);
+
+        System.out.println("Expected -----------------");
+        System.out.println(expectedDocumentsTag);
+
+        System.out.println("Actual -----------------");
+        System.out.println(documentsTag);
+
+        assertEquals(expectedDocumentsTag.toString(), documentsTag.toString());
     }
 }
