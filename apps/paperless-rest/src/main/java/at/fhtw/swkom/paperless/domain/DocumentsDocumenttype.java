@@ -55,4 +55,16 @@ public class DocumentsDocumenttype {
     @OneToMany(mappedBy = "documentType")
     private Set<DocumentsDocument> documentTypeDocumentsDocuments;
 
+    @Override
+    public String toString() {
+        return "DocumentsDocumenttype{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", match='" + match + '\'' +
+                ", matchingAlgorithm=" + matchingAlgorithm +
+                ", isInsensitive=" + isInsensitive +
+                ", owner=" + owner +
+                ", documentTypeDocumentsDocuments=" + documentTypeDocumentsDocuments +
+                '}';
+    }
 }
