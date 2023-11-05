@@ -55,4 +55,16 @@ public class DocumentsCorrespondent {
     @OneToMany(mappedBy = "correspondent")
     private Set<DocumentsDocument> correspondentDocumentsDocuments;
 
+    @Override
+    public String toString() {
+        return "DocumentsCorrespondent{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", match='" + match + '\'' +
+                ", matchingAlgorithm=" + matchingAlgorithm +
+                ", isInsensitive=" + isInsensitive +
+                ", owner=" + owner +
+                ", correspondentDocumentsDocuments=" + correspondentDocumentsDocuments +
+                '}';
+    }
 }

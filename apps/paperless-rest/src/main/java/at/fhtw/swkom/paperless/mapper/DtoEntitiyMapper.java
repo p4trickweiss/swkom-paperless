@@ -1,6 +1,7 @@
 package at.fhtw.swkom.paperless.mapper;
 
 import at.fhtw.swkom.paperless.domain.*;
+import at.fhtw.swkom.paperless.services.dto.Correspondent;
 import at.fhtw.swkom.paperless.services.dto.DocTag;
 import at.fhtw.swkom.paperless.services.dto.Document;
 import at.fhtw.swkom.paperless.services.dto.DocumentType;
@@ -30,5 +31,10 @@ public interface DtoEntitiyMapper extends JsonNullableMapper {
     DocumentType entityToDto(DocumentsDocumenttype documentType);
     DocumentsDocumenttype dtoToEntity(DocumentType documentType);
 
+    //Document Corespondent:
+    //entity(DocumentCorrespondent) -> dto(Corespondent)
+    //dto(Correspondent) -> entity(DocumentCorrespondent)
+    Correspondent entityToDto(DocumentsCorrespondent correspondent);
+    DocumentsCorrespondent dtoToEntity(Correspondent correspondent);
 
 }
