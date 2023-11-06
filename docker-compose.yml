@@ -1,17 +1,22 @@
 version: "3.8"
 
 services:
-  paperless-db:
+  paperlessdb:
     image: postgres:latest
     environment:
       POSTGRES_USER: paperless
       POSTGRES_PASSWORD: paperless
       POSTGRES_DB: paperless
     ports:
-      - "5434:5432"
+      - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
-    container_name: paperless-db
+    container_name: paperlessdb
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
@@ -31,7 +36,8 @@ services:
       - "8081:8080"
     container_name: paperless-rest
     depends_on:
-      - paperless-db
+      paperlessdb:
+          condition: service_healthy
 
   paperless-ui:
     build:
