@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  jackson:
+    date-format: at.fhtw.swkom.paperless.services.RFC3339DateFormat
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+
+  datasource:
+    url: jdbc:postgresql://paperless-db:5432/paperless
+    username: paperless
+    password: paperless
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update

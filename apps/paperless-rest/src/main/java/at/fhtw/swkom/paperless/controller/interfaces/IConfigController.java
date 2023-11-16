@@ -1,7 +1,7 @@
 package at.fhtw.swkom.paperless.controller.interfaces;
 
 import at.fhtw.swkom.paperless.controller.generated.ApiUtil;
-import at.fhtw.swkom.paperless.services.dto.*;
+import at.fhtw.swkom.paperless.data.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

@@ -1,20 +1,12 @@
 package at.fhtw.swkom.paperless.services.validation;
 
-import at.fhtw.swkom.paperless.domain.DocumentsDocument;
-import at.fhtw.swkom.paperless.domain.DocumentsDocumentTags;
-import at.fhtw.swkom.paperless.repos.DocumentsDocumentRepository;
+import at.fhtw.swkom.paperless.data.domain.DocumentsDocument;
+import at.fhtw.swkom.paperless.data.repos.DocumentsDocumentRepository;
 import jakarta.validation.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.Set;
 

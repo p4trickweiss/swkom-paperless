@@ -1,10 +1,10 @@
 package at.fhtw.swkom.paperless.controller.interfaces;
 
 import at.fhtw.swkom.paperless.controller.generated.ApiUtil;
-import at.fhtw.swkom.paperless.services.dto.CreateCorrespondentRequest;
-import at.fhtw.swkom.paperless.services.dto.GetCorrespondents200Response;
-import at.fhtw.swkom.paperless.services.dto.UpdateCorrespondent200Response;
-import at.fhtw.swkom.paperless.services.dto.UpdateCorrespondentRequest;
+import at.fhtw.swkom.paperless.data.dto.CreateCorrespondentRequest;
+import at.fhtw.swkom.paperless.data.dto.GetCorrespondents200Response;
+import at.fhtw.swkom.paperless.data.dto.UpdateCorrespondent200Response;
+import at.fhtw.swkom.paperless.data.dto.UpdateCorrespondentRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;

@@ -1,11 +1,8 @@
 package at.fhtw.swkom.paperless.services.mapper;
 
-import at.fhtw.swkom.paperless.domain.DocumentsDocument;
-import at.fhtw.swkom.paperless.domain.DocumentsDocumenttype;
-import at.fhtw.swkom.paperless.mapper.DtoEntitiyMapper;
-import at.fhtw.swkom.paperless.mapper.DtoEntitiyMapperImpl;
-import at.fhtw.swkom.paperless.services.dto.DocumentType;
-import io.swagger.v3.core.util.Json;
+import at.fhtw.swkom.paperless.data.domain.DocumentsDocumenttype;
+import at.fhtw.swkom.paperless.data.dto.DocumentType;
+import at.fhtw.swkom.paperless.data.mapper.DtoEntitiyMapperImpl;
 import org.junit.jupiter.api.Test;
 import org.openapitools.jackson.nullable.JsonNullable;
 

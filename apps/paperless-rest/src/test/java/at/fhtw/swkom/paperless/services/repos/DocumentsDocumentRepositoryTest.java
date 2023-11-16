@@ -1,18 +1,11 @@
 package at.fhtw.swkom.paperless.services.repos;
 
-import at.fhtw.swkom.paperless.domain.DocumentsDocument;
-import at.fhtw.swkom.paperless.domain.DocumentsDocumenttype;
-import at.fhtw.swkom.paperless.repos.DocumentsDocumentRepository;
-import org.aspectj.lang.annotation.Before;
-import org.hibernate.exception.ConstraintViolationException;
+import at.fhtw.swkom.paperless.data.domain.DocumentsDocument;
+import at.fhtw.swkom.paperless.data.repos.DocumentsDocumentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.Optional;
 
