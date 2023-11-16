@@ -1,4 +1,4 @@
-package at.fhtw.swkom.paperless.controller;
+package at.fhtw.swkom.paperless.controller.generated;
 
 import org.springframework.web.context.request.NativeWebRequest;
 
