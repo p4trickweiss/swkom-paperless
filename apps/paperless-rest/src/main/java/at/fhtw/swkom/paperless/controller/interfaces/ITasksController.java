@@ -1,9 +1,9 @@
 package at.fhtw.swkom.paperless.controller.interfaces;
 
 import at.fhtw.swkom.paperless.controller.generated.ApiUtil;
-import at.fhtw.swkom.paperless.services.dto.AckTasks200Response;
-import at.fhtw.swkom.paperless.services.dto.AckTasksRequest;
-import at.fhtw.swkom.paperless.services.dto.GetTasks200ResponseInner;
+import at.fhtw.swkom.paperless.data.dto.AckTasks200Response;
+import at.fhtw.swkom.paperless.data.dto.AckTasksRequest;
+import at.fhtw.swkom.paperless.data.dto.GetTasks200ResponseInner;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;

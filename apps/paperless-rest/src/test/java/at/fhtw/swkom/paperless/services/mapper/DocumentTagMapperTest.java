@@ -1,9 +1,8 @@
 package at.fhtw.swkom.paperless.services.mapper;
 
-import at.fhtw.swkom.paperless.domain.DocumentsTag;
-import at.fhtw.swkom.paperless.mapper.DtoEntitiyMapperImpl;
-import at.fhtw.swkom.paperless.services.dto.DocTag;
-import at.fhtw.swkom.paperless.services.dto.Document;
+import at.fhtw.swkom.paperless.data.domain.DocumentsTag;
+import at.fhtw.swkom.paperless.data.dto.DocTag;
+import at.fhtw.swkom.paperless.data.mapper.DtoEntitiyMapperImpl;
 import org.junit.jupiter.api.Test;
 import org.openapitools.jackson.nullable.JsonNullable;
 
