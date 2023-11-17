@@ -1,6 +1,6 @@
-package at.fhtw.swkom.paperless.controller;
+package at.fhtw.swkom.paperless.controller.impl;
 
-import at.fhtw.swkom.paperless.controller.interfaces.ICorrespondentsController;
+import at.fhtw.swkom.paperless.controller.ISearchController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,11 +10,11 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
-public class CorrespondentsController implements ICorrespondentsController {
+public class SearchController implements ISearchController {
     private final NativeWebRequest request;
 
     @Autowired
-    public CorrespondentsController(NativeWebRequest request) {
+    public SearchController(NativeWebRequest request) {
         this.request = request;
     }
 

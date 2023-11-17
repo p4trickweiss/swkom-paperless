@@ -1,6 +1,6 @@
-package at.fhtw.swkom.paperless.controller;
+package at.fhtw.swkom.paperless.controller.impl;
 
-import at.fhtw.swkom.paperless.controller.interfaces.IDocumentsController;
+import at.fhtw.swkom.paperless.controller.ITagsController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,11 +10,11 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
-public class DocumentsController implements IDocumentsController {
+public class TagsController implements ITagsController {
     private final NativeWebRequest request;
 
     @Autowired
-    public DocumentsController(NativeWebRequest request) {
+    public TagsController(NativeWebRequest request) {
         this.request = request;
     }
 

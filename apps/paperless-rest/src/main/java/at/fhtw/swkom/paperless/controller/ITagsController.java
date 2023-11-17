@@ -1,4 +1,4 @@
-package at.fhtw.swkom.paperless.controller.interfaces;
+package at.fhtw.swkom.paperless.controller;
 
 import at.fhtw.swkom.paperless.controller.generated.ApiUtil;
 import at.fhtw.swkom.paperless.data.dto.*;
@@ -17,33 +17,33 @@ import org.springframework.web.context.request.NativeWebRequest;
 
 import java.util.Optional;
 
-public interface IDocumentTypesController {
+public interface ITagsController {
     default Optional<NativeWebRequest> getRequest() {
         return Optional.empty();
     }
 
     /**
-     * GET /api/document_types
+     * GET /api/tags
      *
      * @param page  (optional)
      * @param fullPerms  (optional)
      * @return Success (status code 200)
      */
     @Operation(
-            operationId = "getDocumentTypes",
-            tags = { "DocumentTypes" },
+            operationId = "getTags",
+            tags = { "Tags" },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Success", content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = GetDocumentTypes200Response.class))
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = GetTags200Response.class))
                     })
             }
     )
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/api/document_types/",
+            value = "/api/tags/",
             produces = { "application/json" }
     )
-    default ResponseEntity<GetDocumentTypes200Response> getDocumentTypes(
+    default ResponseEntity<GetTags200Response> getTags(
             @Parameter(name = "page", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "page", required = false) Integer page,
             @Parameter(name = "full_perms", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "full_perms", required = false) Boolean fullPerms
     ) {
@@ -61,33 +61,33 @@ public interface IDocumentTypesController {
     }
 
     /**
-     * POST /api/document_types
+     * POST /api/tags
      *
-     * @param createCorrespondentRequest  (optional)
+     * @param createTagRequest  (optional)
      * @return Success (status code 200)
      */
     @Operation(
-            operationId = "createDocumentType",
-            tags = { "DocumentTypes" },
+            operationId = "createTag",
+            tags = { "Tags" },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Success", content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = CreateDocumentType200Response.class))
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = CreateTag200Response.class))
                     })
             }
     )
     @RequestMapping(
             method = RequestMethod.POST,
-            value = "/api/document_types/",
+            value = "/api/tags/",
             produces = { "application/json" },
             consumes = { "application/json" }
     )
-    default ResponseEntity<CreateDocumentType200Response> createDocumentType(
-            @Parameter(name = "CreateCorrespondentRequest", description = "") @Valid @RequestBody(required = false) CreateCorrespondentRequest createCorrespondentRequest
+    default ResponseEntity<CreateTag200Response> createTag(
+            @Parameter(name = "CreateTagRequest", description = "") @Valid @RequestBody(required = false) CreateTagRequest createTagRequest
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"owner\" : 1, \"matching_algorithm\" : 6, \"user_can_change\" : true, \"is_insensitive\" : true, \"name\" : \"name\", \"match\" : \"match\", \"id\" : 0, \"slug\" : \"slug\" }";
+                    String exampleString = "{ \"owner\" : 1, \"matching_algorithm\" : 6, \"user_can_change\" : true, \"color\" : \"color\", \"is_insensitive\" : true, \"name\" : \"name\", \"match\" : \"match\", \"id\" : 0, \"text_color\" : \"text_color\", \"is_inbox_tag\" : true, \"slug\" : \"slug\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -98,35 +98,35 @@ public interface IDocumentTypesController {
     }
 
     /**
-     * PUT /api/document_types/{id}
+     * PUT /api/tags/{id}
      *
      * @param id  (required)
-     * @param updateDocumentTypeRequest  (optional)
+     * @param updateTagRequest  (optional)
      * @return Success (status code 200)
      */
     @Operation(
-            operationId = "updateDocumentType",
-            tags = { "DocumentTypes" },
+            operationId = "updateTag",
+            tags = { "Tags" },
             responses = {
                     @ApiResponse(responseCode = "200", description = "Success", content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = UpdateDocumentType200Response.class))
+                            @Content(mediaType = "application/json", schema = @Schema(implementation = UpdateTag200Response.class))
                     })
             }
     )
     @RequestMapping(
             method = RequestMethod.PUT,
-            value = "/api/document_types/{id}/",
+            value = "/api/tags/{id}/",
             produces = { "application/json" },
             consumes = { "application/json" }
     )
-    default ResponseEntity<UpdateDocumentType200Response> updateDocumentType(
+    default ResponseEntity<UpdateTag200Response> updateTag(
             @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id,
-            @Parameter(name = "UpdateDocumentTypeRequest", description = "") @Valid @RequestBody(required = false) UpdateDocumentTypeRequest updateDocumentTypeRequest
+            @Parameter(name = "UpdateTagRequest", description = "") @Valid @RequestBody(required = false) UpdateTagRequest updateTagRequest
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"owner\" : 5, \"matching_algorithm\" : 6, \"user_can_change\" : true, \"document_count\" : 1, \"is_insensitive\" : true, \"name\" : \"name\", \"match\" : \"match\", \"id\" : 0, \"slug\" : \"slug\" }";
+                    String exampleString = "{ \"owner\" : 5, \"matching_algorithm\" : 6, \"user_can_change\" : true, \"document_count\" : 1, \"color\" : \"color\", \"is_insensitive\" : true, \"name\" : \"name\", \"match\" : \"match\", \"id\" : 0, \"text_color\" : \"text_color\", \"is_inbox_tag\" : true, \"slug\" : \"slug\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -137,23 +137,23 @@ public interface IDocumentTypesController {
     }
 
     /**
-     * DELETE /api/document_types/{id}
+     * DELETE /api/tags/{id}
      *
      * @param id  (required)
      * @return Success (status code 204)
      */
     @Operation(
-            operationId = "deleteDocumentType",
-            tags = { "DocumentTypes" },
+            operationId = "deleteTag",
+            tags = { "Tags" },
             responses = {
                     @ApiResponse(responseCode = "204", description = "Success")
             }
     )
     @RequestMapping(
             method = RequestMethod.DELETE,
-            value = "/api/document_types/{id}/"
+            value = "/api/tags/{id}/"
     )
-    default ResponseEntity<Void> deleteDocumentType(
+    default ResponseEntity<Void> deleteTag(
             @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id
     ) {
         return new ResponseEntity<>(HttpStatus.OK);
