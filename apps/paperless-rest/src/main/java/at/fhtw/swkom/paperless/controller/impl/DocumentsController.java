@@ -1,27 +1,27 @@
 package at.fhtw.swkom.paperless.controller.impl;
 
-import at.fhtw.swkom.paperless.controller.generated.ApiUtil;
 import at.fhtw.swkom.paperless.controller.IDocumentsController;
-import at.fhtw.swkom.paperless.data.dto.GetDocuments200Response;
+import at.fhtw.swkom.paperless.services.IFileStorage;
 import at.fhtw.swkom.paperless.services.IMessageBroker;
+import at.fhtw.swkom.paperless.services.impl.MinIOFileStorage;
 import at.fhtw.swkom.paperless.services.impl.RabbitMQMessageBroker;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,11 +30,13 @@ import java.util.Optional;
 public class DocumentsController implements IDocumentsController {
     private final NativeWebRequest request;
     private final IMessageBroker rabbit;
+    private final IFileStorage minio;
 
     @Autowired
-    public DocumentsController(NativeWebRequest request, RabbitMQMessageBroker rabbit) {
+    public DocumentsController(NativeWebRequest request, RabbitMQMessageBroker rabbit, MinIOFileStorage minio) {
         this.request = request;
         this.rabbit = rabbit;
+        this.minio = minio;
     }
 
     @Override
@@ -43,54 +45,43 @@ public class DocumentsController implements IDocumentsController {
     }
 
     /**
-     * GET /api/documents
+     * POST /api/documents/post_document
      *
-     * @param page  (optional)
-     * @param pageSize  (optional)
-     * @param query  (optional)
-     * @param ordering  (optional)
-     * @param tagsIdAll  (optional)
-     * @param documentTypeId  (optional)
-     * @param storagePathIdIn  (optional)
-     * @param correspondentId  (optional)
-     * @param truncateContent  (optional)
+     * @param title  (optional)
+     * @param created  (optional)
+     * @param documentType  (optional)
+     * @param tags  (optional)
+     * @param correspondent  (optional)
+     * @param document  (optional)
      * @return Success (status code 200)
      */
     @Operation(
-            operationId = "getDocuments",
+            operationId = "uploadDocument",
             tags = { "Documents" },
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Success", content = {
-                            @Content(mediaType = "application/json", schema = @Schema(implementation = GetDocuments200Response.class))
-                    })
+                    @ApiResponse(responseCode = "200", description = "Success")
             }
     )
     @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/api/documents/",
-            produces = { "application/json" }
+            method = RequestMethod.POST,
+            value = "/api/documents/post_document/",
+            consumes = { "multipart/form-data" }
     )
-    public ResponseEntity<GetDocuments200Response> getDocuments(
-            @Parameter(name = "Page", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "Page", required = false) Integer page,
-            @Parameter(name = "page_size", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "page_size", required = false) Integer pageSize,
-            @Parameter(name = "query", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "query", required = false) String query,
-            @Parameter(name = "ordering", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "ordering", required = false) String ordering,
-            @Parameter(name = "tags__id__all", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "tags__id__all", required = false) List<Integer> tagsIdAll,
-            @Parameter(name = "document_type__id", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "document_type__id", required = false) Integer documentTypeId,
-            @Parameter(name = "storage_path__id__in", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "storage_path__id__in", required = false) Integer storagePathIdIn,
-            @Parameter(name = "correspondent__id", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "correspondent__id", required = false) Integer correspondentId,
-            @Parameter(name = "truncate_content", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "truncate_content", required = false) Boolean truncateContent
+    public ResponseEntity<Void> uploadDocument(
+            @Parameter(name = "title", description = "") @Valid @RequestParam(value = "title", required = false) String title,
+            @Parameter(name = "created", description = "") @Valid @RequestParam(value = "created", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime created,
+            @Parameter(name = "document_type", description = "") @Valid @RequestParam(value = "document_type", required = false) Integer documentType,
+            @Parameter(name = "tags", description = "") @Valid @RequestPart(value = "tags", required = false) List<Integer> tags,
+            @Parameter(name = "correspondent", description = "") @Valid @RequestParam(value = "correspondent", required = false) Integer correspondent,
+            @Parameter(name = "document", description = "") @RequestPart(value = "document", required = false) List<MultipartFile> document
     ) {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{\"count\":0,\"next\":null,\"previous\":null,\"all\":[],\"results\":[]}";
-                    ApiUtil.setExampleResponse(request, "application/json", exampleString);
-                    break;
-                }
-            }
-        });
+        //save to db
+
+        //upload file to minio
+        minio.upload(document.get(0));
+        //send message with id to rabbitmq
         rabbit.send(1);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
