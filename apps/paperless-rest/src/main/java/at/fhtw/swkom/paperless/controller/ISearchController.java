@@ -1,4 +1,4 @@
-package at.fhtw.swkom.paperless.controller.interfaces;
+package at.fhtw.swkom.paperless.controller;
 
 import at.fhtw.swkom.paperless.controller.generated.ApiUtil;
 import io.swagger.v3.oas.annotations.Operation;

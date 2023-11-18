@@ -23,5 +23,4 @@ public class OpenApiGeneratorApplication {
     public Module jsonNullableModule() {
         return new JsonNullableModule();
     }
-
 }

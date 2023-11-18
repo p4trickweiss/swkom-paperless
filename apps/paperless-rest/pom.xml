@@ -124,6 +124,7 @@
             <artifactId>jackson-databind-nullable</artifactId>
             <version>0.2.6</version>
         </dependency>
+
         <!-- Bean Validation API support -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -162,7 +163,18 @@
             <version>8.0.0.Final</version>
         </dependency>
 
+        <!-- RabbitMQ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
 
+        <!-- MinIO -->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>8.5.7</version>
+        </dependency>
 
     </dependencies>
 </project>
