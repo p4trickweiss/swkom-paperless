@@ -39,7 +39,7 @@ public class DocumentMapperTest {
         document.setArchiveSerialNumber(Integer.valueOf(archiveSerialNumber));
 
         //when test starts both values are null
-        document.setArchiveFilename(archivedFileName);
+        document.setArchivedFilename(archivedFileName);
         document.setOriginalFileName(originalFileName);
 
         // TODO:

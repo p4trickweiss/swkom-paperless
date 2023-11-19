@@ -55,7 +55,7 @@ public class DocumentsDocument {
     @Column(nullable = false)
     private OffsetDateTime added;
 
-    @Column(nullable = false, length = 11)
+    @Column(/*nullable = false,*/ length = 11)
     private String storageType;
 
     @Column(length = 1024)
@@ -68,17 +68,17 @@ public class DocumentsDocument {
     private String archiveChecksum;
 
     @Column(length = 1024)
-    private String archiveFilename;
+    private String archivedFilename;
 
     @Column(length = 1024)
     private String originalFileName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "correspondent_id", nullable = false)
+    @JoinColumn(name = "correspondent_id" /*, nullable = false*/)
     private DocumentsCorrespondent correspondent;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "document_type_id", nullable = false)
+    @JoinColumn(name = "document_type_id" /*, nullable = false*/)
     private DocumentsDocumenttype documentType;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -108,7 +108,7 @@ public class DocumentsDocument {
                 ", filename='" + filename + '\'' +
                 ", archiveSerialNumber=" + archiveSerialNumber +
                 ", archiveChecksum='" + archiveChecksum + '\'' +
-                ", archiveFilename='" + archiveFilename + '\'' +
+                ", archiveFilename='" + archivedFilename + '\'' +
                 ", originalFileName='" + originalFileName + '\'' +
                 ", correspondent=" + correspondent +
                 ", documentType=" + documentType +

@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface IDocumentsController {
@@ -181,7 +182,7 @@ public interface IDocumentsController {
 
     }
 
-    /**
+    /*
      * POST /api/documents/post_document
      *
      * @param title  (optional)
@@ -204,13 +205,8 @@ public interface IDocumentsController {
             value = "/api/documents/post_document/",
             consumes = { "multipart/form-data" }
     )
-    default ResponseEntity<Void> uploadDocument(
-            @Parameter(name = "title", description = "") @Valid @RequestParam(value = "title", required = false) String title,
-            @Parameter(name = "created", description = "") @Valid @RequestParam(value = "created", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime created,
-            @Parameter(name = "document_type", description = "") @Valid @RequestParam(value = "document_type", required = false) Integer documentType,
-            @Parameter(name = "tags", description = "") @Valid @RequestPart(value = "tags", required = false) List<Integer> tags,
-            @Parameter(name = "correspondent", description = "") @Valid @RequestParam(value = "correspondent", required = false) Integer correspondent,
-            @Parameter(name = "document", description = "") @RequestPart(value = "document", required = false) List<MultipartFile> document
+    default ResponseEntity<Map<String, Object>> uploadDocument(
+            @RequestPart("document") MultipartFile file
     ) {
         return new ResponseEntity<>(HttpStatus.OK);
 

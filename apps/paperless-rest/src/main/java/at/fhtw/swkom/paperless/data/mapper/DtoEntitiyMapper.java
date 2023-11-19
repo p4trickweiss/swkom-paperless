@@ -13,7 +13,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 public interface DtoEntitiyMapper extends JsonNullableMapper {
 
     @Mapping(target = "originalFileName", source = "originalFileName")
-    @Mapping(target = "archivedFileName", source = "archiveFilename")
+    @Mapping(target = "archivedFileName", source = "archivedFilename")
     Document entityToDto(DocumentsDocument documentsDocument);
     DocumentsDocument dtoToEntity(Document documentDto);
 
