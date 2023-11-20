@@ -1,7 +1,7 @@
 package at.fhtw.swkom.paperless.services.repos;
 
-import at.fhtw.swkom.paperless.domain.DocumentsDocumenttype;
-import at.fhtw.swkom.paperless.repos.DocumentsDocumenttypeRepository;
+import at.fhtw.swkom.paperless.data.domain.DocumentsDocumenttype;
+import at.fhtw.swkom.paperless.data.repos.DocumentsDocumenttypeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

@@ -1,19 +1,13 @@
 package at.fhtw.swkom.paperless.services.mapper;
 
-import at.fhtw.swkom.paperless.domain.*;
-import at.fhtw.swkom.paperless.mapper.DtoEntitiyMapper;
-import at.fhtw.swkom.paperless.mapper.DtoEntitiyMapperImpl;
-import at.fhtw.swkom.paperless.services.dto.Document;
-import io.swagger.v3.core.util.Json;
-import jakarta.persistence.*;
-import jakarta.validation.Valid;
+import at.fhtw.swkom.paperless.data.domain.DocumentsDocument;
+import at.fhtw.swkom.paperless.data.dto.Document;
+import at.fhtw.swkom.paperless.data.mapper.DtoEntitiyMapperImpl;
 import org.junit.jupiter.api.Test;
 import org.openapitools.jackson.nullable.JsonNullable;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.*;
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DocumentMapperTest {
