@@ -1,6 +1,8 @@
 package at.fhtw.swkom.paperless.controller.impl;
 
 import at.fhtw.swkom.paperless.controller.IDocumentsController;
+import at.fhtw.swkom.paperless.data.domain.DocumentsDocument;
+import at.fhtw.swkom.paperless.data.repos.DocumentsDocumentRepository;
 import at.fhtw.swkom.paperless.services.IFileStorage;
 import at.fhtw.swkom.paperless.services.IMessageBroker;
 import at.fhtw.swkom.paperless.services.impl.MinIOFileStorage;
@@ -22,7 +24,9 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.OffsetDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -31,12 +35,14 @@ public class DocumentsController implements IDocumentsController {
     private final NativeWebRequest request;
     private final IMessageBroker rabbit;
     private final IFileStorage minio;
+    private final DocumentsDocumentRepository documentRepository;
 
     @Autowired
-    public DocumentsController(NativeWebRequest request, RabbitMQMessageBroker rabbit, MinIOFileStorage minio) {
+    public DocumentsController(NativeWebRequest request, RabbitMQMessageBroker rabbit, MinIOFileStorage minio, DocumentsDocumentRepository documentRepository) {
         this.request = request;
         this.rabbit = rabbit;
         this.minio = minio;
+        this.documentRepository = documentRepository;
     }
 
     @Override
@@ -77,10 +83,22 @@ public class DocumentsController implements IDocumentsController {
     ) {
         //save to db
 
+        MultipartFile file = document.get(0);
+
+        DocumentsDocument doc = new DocumentsDocument();
+        doc.setFilename(file.getOriginalFilename());
+        doc.setContent(file.getContentType());
+        doc.setCreated(OffsetDateTime.now());
+        doc.setModified(OffsetDateTime.now());
+        doc.setAdded(OffsetDateTime.now());
+        doc.setStorageType(file.getContentType());
+
+        Integer doc_id = documentRepository.save(doc).getId();
+
         //upload file to minio
-        minio.upload(document.get(0));
+        minio.upload(file);
         //send message with id to rabbitmq
-        rabbit.send(1);
+        rabbit.send(doc_id);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

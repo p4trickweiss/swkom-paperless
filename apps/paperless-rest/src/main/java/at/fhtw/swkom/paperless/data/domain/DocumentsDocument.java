@@ -39,11 +39,11 @@ public class DocumentsDocument {
     )
     private Integer id;
 
-    @Column(nullable = false, length = 128)
-    @NotNull
+    @Column(/*nullable = false,*/ length = 128)
+    // @NotNull
     private String title;
 
-    @Column(nullable = false, columnDefinition = "text")
+    @Column(/*nullable = false,*/ columnDefinition = "text")
     private String content;
 
     @Column(nullable = false)
@@ -55,7 +55,7 @@ public class DocumentsDocument {
     @Column(nullable = false)
     private OffsetDateTime added;
 
-    @Column(nullable = false, length = 11)
+    @Column(/*nullable = false,*/ length = 11)
     private String storageType;
 
     @Column(length = 1024)
@@ -74,11 +74,11 @@ public class DocumentsDocument {
     private String originalFileName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "correspondent_id", nullable = false)
+    @JoinColumn(name = "correspondent_id"/*, nullable = false*/)
     private DocumentsCorrespondent correspondent;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "document_type_id", nullable = false)
+    @JoinColumn(name = "document_type_id"/*, nullable = false*/)
     private DocumentsDocumenttype documentType;
 
     @ManyToOne(fetch = FetchType.LAZY)

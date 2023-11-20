@@ -2,6 +2,7 @@ package at.fhtw.swkom.paperless.services.impl;
 
 import at.fhtw.swkom.paperless.config.RabbitMQConfig;
 import at.fhtw.swkom.paperless.services.IMessageBroker;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class RabbitMQMessageBroker implements IMessageBroker {
     }
 
     @Override
-    public void send(int id) {
-        this.template.convertAndSend(queue.getName(), String.valueOf(id));
+    public void send(Integer id) {
+        this.template.convertAndSend(queue.getName(), id.toString());
     }
 }
