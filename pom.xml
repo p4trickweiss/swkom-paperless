@@ -18,6 +18,7 @@
 
     <modules>
         <module>apps/paperless-rest</module>
+        <module>apps/paperless-services</module>
     </modules>
 
 </project>
