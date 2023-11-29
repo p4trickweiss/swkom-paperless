@@ -3,7 +3,7 @@ server:
 
 spring:
   jackson:
-    date-format: at.fhtw.swkom.paperless.services.RFC3339DateFormat
+    date-format: at.technikumwien.swkom.paperlessrest.services.RFC3339DateFormat
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
 
@@ -17,3 +17,9 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin-password
