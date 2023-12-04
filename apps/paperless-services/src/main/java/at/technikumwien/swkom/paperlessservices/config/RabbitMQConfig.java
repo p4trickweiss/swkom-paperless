@@ -1,4 +1,4 @@
-package at.technikumwien.swkom.paperlessrest.config;
+package at.technikumwien.swkom.paperlessservices.config;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
