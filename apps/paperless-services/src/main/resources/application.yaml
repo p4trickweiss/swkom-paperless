@@ -4,3 +4,12 @@ spring:
     port: 5672
     username: admin
     password: admin-password
+
+minio:
+  access:
+    name: admin
+    secret: admin-password
+  endpoint: minio
+
+tesseract:
+  data: /usr/share/tesseract-ocr/4.00/tessdata
