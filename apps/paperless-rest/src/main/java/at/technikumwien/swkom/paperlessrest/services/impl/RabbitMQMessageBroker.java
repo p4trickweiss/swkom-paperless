@@ -19,7 +19,12 @@ public class RabbitMQMessageBroker implements IMessageBroker {
     }
 
     @Override
-    public void send(String path) {
-        this.template.convertAndSend(queue.getName(), path);
+    public void send(String message) {
+        this.template.convertAndSend(queue.getName(), message);
+    }
+
+    @Override
+    public void processOCRResultsMessage() {
+        //TODO receive message from ocr-results queue and save to DB
     }
 }

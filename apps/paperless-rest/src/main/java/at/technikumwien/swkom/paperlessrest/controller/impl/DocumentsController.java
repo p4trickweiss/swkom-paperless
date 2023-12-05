@@ -5,8 +5,11 @@ import at.technikumwien.swkom.paperlessrest.data.domain.DocumentsDocument;
 import at.technikumwien.swkom.paperlessrest.data.repos.DocumentsDocumentRepository;
 import at.technikumwien.swkom.paperlessrest.services.IFileStorage;
 import at.technikumwien.swkom.paperlessrest.services.IMessageBroker;
+import at.technikumwien.swkom.paperlessrest.data.messagequeue.ScanDocumentMessage;
 import at.technikumwien.swkom.paperlessrest.services.impl.MinIOFileStorage;
 import at.technikumwien.swkom.paperlessrest.services.impl.RabbitMQMessageBroker;
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -94,8 +97,17 @@ public class DocumentsController implements IDocumentsController {
 
         //upload file to minio
         minio.upload(bucketPath, file);
+
         //send message with bucket path to rabbitmq
-        rabbit.send(bucketPath);
+        ObjectMapper mapper = new ObjectMapper();
+        ScanDocumentMessage scanDocumentMessage = new ScanDocumentMessage(doc.getId(), bucketPath);
+        try {
+            String message = mapper.writeValueAsString(scanDocumentMessage);
+            rabbit.send(message);
+        }
+        catch (JacksonException e) {
+            System.out.println(e.getMessage());
+        }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
