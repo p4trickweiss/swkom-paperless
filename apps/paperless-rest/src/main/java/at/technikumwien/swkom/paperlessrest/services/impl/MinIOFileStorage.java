@@ -1,38 +1,51 @@
 package at.technikumwien.swkom.paperlessrest.services.impl;
 
+import at.technikumwien.swkom.paperlessrest.config.MinIOConfig;
 import at.technikumwien.swkom.paperlessrest.services.IFileStorage;
 import io.minio.*;
 import io.minio.errors.MinioException;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
-@Component
+@Service
 public class MinIOFileStorage implements IFileStorage {
-    private final String BUCKET_NAME = "documents";
+    private final MinIOConfig minIOConfig;
+
+    @Autowired
+    MinIOFileStorage(MinIOConfig minIOConfig) {
+        this.minIOConfig = minIOConfig;
+    }
 
     @Override
-    public void upload(MultipartFile file) {
+    public void upload(String bucketPath, MultipartFile file) {
         try {
-            MinioClient minioClient =
-                    MinioClient.builder()
-                            .endpoint("minio", 9000, false)
-                            .credentials("admin", "admin-password")
-                            .build();
+            MinioClient minioClient = minIOConfig.generateMinioClient();
 
             boolean hasBucketWithName =
-                    minioClient.bucketExists(BucketExistsArgs.builder().bucket(BUCKET_NAME).build());
+                    minioClient.bucketExists(
+                            BucketExistsArgs
+                                    .builder()
+                                    .bucket(MinIOConfig.BUCKET_NAME)
+                                    .build()
+                    );
             if (!hasBucketWithName) {
-                minioClient.makeBucket(MakeBucketArgs.builder().bucket(BUCKET_NAME).build());
+                minioClient.makeBucket(
+                        MakeBucketArgs
+                                .builder()
+                                .bucket(MinIOConfig.BUCKET_NAME)
+                                .build()
+                );
             }
 
             minioClient.putObject(
               PutObjectArgs.builder()
-                      .bucket(BUCKET_NAME)
-                      .object(file.getOriginalFilename())
+                      .bucket(MinIOConfig.BUCKET_NAME)
+                      .object(bucketPath)
                       .stream(file.getInputStream(), file.getSize(), -1)
                       .build()
             );

@@ -19,7 +19,13 @@ spring:
       ddl-auto: update
 
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: admin
     password: admin-password
+
+minio:
+  access:
+    name: admin
+    secret: admin-password
+  endpoint: minio

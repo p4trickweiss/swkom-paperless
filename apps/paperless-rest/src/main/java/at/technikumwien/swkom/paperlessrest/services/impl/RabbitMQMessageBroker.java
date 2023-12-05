@@ -19,7 +19,7 @@ public class RabbitMQMessageBroker implements IMessageBroker {
     }
 
     @Override
-    public void send(Integer id) {
-        this.template.convertAndSend(queue.getName(), id.toString());
+    public void send(String path) {
+        this.template.convertAndSend(queue.getName(), path);
     }
 }

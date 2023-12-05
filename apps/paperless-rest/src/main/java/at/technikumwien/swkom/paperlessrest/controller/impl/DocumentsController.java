@@ -89,12 +89,13 @@ public class DocumentsController implements IDocumentsController {
         doc.setModified(OffsetDateTime.now());
         doc.setAdded(OffsetDateTime.now());
 
-        Integer doc_id = documentRepository.save(doc).getId();
+        Integer docId = documentRepository.save(doc).getId();
+        String bucketPath = docId.toString() + "/" + doc.getFilename();
 
         //upload file to minio
-        minio.upload(file);
-        //send message with id to rabbitmq
-        rabbit.send(doc_id);
+        minio.upload(bucketPath, file);
+        //send message with bucket path to rabbitmq
+        rabbit.send(bucketPath);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
