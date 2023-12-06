@@ -1,8 +1,12 @@
 package at.technikumwien.swkom.paperlessservices.services.impl;
 
+import at.technikumwien.swkom.paperlessservices.data.messagequeue.DocumentResultMessage;
 import at.technikumwien.swkom.paperlessservices.services.IDocumentOCRService;
 import at.technikumwien.swkom.paperlessservices.services.IFileStorage;
+import at.technikumwien.swkom.paperlessservices.services.IMessageBroker;
 import at.technikumwien.swkom.paperlessservices.services.IOCRWorker;
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +25,11 @@ public class DocumentOCRService implements IDocumentOCRService {
     }
 
     @Override
-    public void processDocument(String docName) {
+    public String processDocument(String docName, int id) {
         try(InputStream fileStream = minIOService.download(docName)) {
             String content = tesseractOCRWorker.processFile(docName, fileStream);
-            //TODO send content to REST via ocr-result queue
+
+            return content;
         }
         catch (IOException e) {
             throw new RuntimeException(e);

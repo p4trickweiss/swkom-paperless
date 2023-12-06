@@ -100,7 +100,7 @@ public class DocumentsController implements IDocumentsController {
 
         //send message with bucket path to rabbitmq
         ObjectMapper mapper = new ObjectMapper();
-        ScanDocumentMessage scanDocumentMessage = new ScanDocumentMessage(doc.getId(), bucketPath);
+        ScanDocumentMessage scanDocumentMessage = new ScanDocumentMessage(docId, bucketPath);
         try {
             String message = mapper.writeValueAsString(scanDocumentMessage);
             rabbit.send(message);

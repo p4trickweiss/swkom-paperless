@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
     public static final String DOCUMENT_QUEUE = "documents";
+    public static final String DOCUMENT_RESULT_QUEUE = "documents_result";
 
     @Value("${spring.rabbitmq.host}")
     private String hostname;
@@ -20,8 +21,8 @@ public class RabbitMQConfig {
     private String password;
 
     @Bean
-    public Queue documentQueue() {
-        return new Queue(DOCUMENT_QUEUE, false);
+    public Queue documentResultQueue() {
+        return new Queue(DOCUMENT_RESULT_QUEUE, false);
     }
 
     @Bean
@@ -35,7 +36,7 @@ public class RabbitMQConfig {
     @Bean
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory());
-        rabbitTemplate.setDefaultReceiveQueue(DOCUMENT_QUEUE);
+        rabbitTemplate.setDefaultReceiveQueue(DOCUMENT_RESULT_QUEUE);
         return rabbitTemplate;
     }
 }

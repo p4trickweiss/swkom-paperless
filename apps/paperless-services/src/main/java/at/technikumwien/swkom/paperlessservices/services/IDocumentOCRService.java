@@ -1,5 +1,5 @@
 package at.technikumwien.swkom.paperlessservices.services;
 
 public interface IDocumentOCRService {
-    void processDocument(String docName);
+    String processDocument(String docName, int id);
 }
