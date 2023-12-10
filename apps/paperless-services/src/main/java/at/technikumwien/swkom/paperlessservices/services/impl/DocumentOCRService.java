@@ -7,6 +7,8 @@ import at.technikumwien.swkom.paperlessservices.services.IMessageBroker;
 import at.technikumwien.swkom.paperlessservices.services.IOCRWorker;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ import java.io.InputStream;
 
 @Service
 public class DocumentOCRService implements IDocumentOCRService {
+
     private final IOCRWorker tesseractOCRWorker;
     private final IFileStorage minIOService;
 
