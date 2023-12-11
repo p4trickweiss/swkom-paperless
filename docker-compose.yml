@@ -44,6 +44,17 @@ services:
     volumes:
       - minio-storage:/data
 
+  paperless-services:
+    container_name: paperless-services
+    build:
+      context: ./apps/paperless-services
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"
+    depends_on:
+      paperless-db:
+        condition: service_healthy
+
   paperless-rest:
     container_name: paperless-rest
     build:
