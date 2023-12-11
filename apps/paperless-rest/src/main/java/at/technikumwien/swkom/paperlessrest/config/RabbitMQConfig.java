@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
     public static final String DOCUMENT_QUEUE = "documents";
+    public static final String DOCUMENT_RESULT_QUEUE = "documents_result";
 
     @Value("${spring.rabbitmq.host}")
     private String hostname;

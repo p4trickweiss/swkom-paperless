@@ -16,7 +16,7 @@ import java.io.InputStream;
 public class TesseractOCRWorker implements IOCRWorker {
     private final String tessData;
 
-    TesseractOCRWorker(@Value("${tesseract.data}") String tessData) {
+    public TesseractOCRWorker(@Value("${tesseract.data}") String tessData) {
         this.tessData = tessData;
     }
 
