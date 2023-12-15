@@ -13,3 +13,7 @@ minio:
 
 tesseract:
   data: /usr/share/tesseract-ocr/4.00/tessdata
+
+elasticsearch:
+  host: elastic-search
+  port: 9200

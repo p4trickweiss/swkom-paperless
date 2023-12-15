@@ -44,6 +44,23 @@ services:
     volumes:
       - minio-storage:/data
 
+  elastic-search:
+    image: elasticsearch:8.7.1
+    environment:
+      - discovery.type=single-node
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "xpack.security.enabled=false"
+      - "xpack.security.enrollment.enabled=false"
+    # ulimits:
+    #   memlock:
+    #     soft: -1
+    #     hard: -1
+    ports:
+      - 9200:9200
+      - 9300:9300
+
   paperless-services:
     container_name: paperless-services
     build:
