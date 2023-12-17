@@ -1,10 +1,9 @@
 package at.technikumwien.swkom.paperlessservices.services.impl;
 
 import at.technikumwien.swkom.paperlessservices.data.messagequeue.DocumentResultMessage;
-import at.technikumwien.swkom.paperlessservices.services.IDocumentOCRService;
-import at.technikumwien.swkom.paperlessservices.services.IFileStorage;
-import at.technikumwien.swkom.paperlessservices.services.IMessageBroker;
-import at.technikumwien.swkom.paperlessservices.services.IOCRWorker;
+import at.technikumwien.swkom.paperlessservices.models.ElasticSearchDocument;
+import at.technikumwien.swkom.paperlessservices.services.*;
+import co.elastic.clients.elasticsearch._types.Result;
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -20,17 +19,25 @@ public class DocumentOCRService implements IDocumentOCRService {
 
     private final IOCRWorker tesseractOCRWorker;
     private final IFileStorage minIOService;
+    private final ISearchIndexService elasticSearchService;
 
     @Autowired
-    DocumentOCRService(TesseractOCRWorker tesseractOCRWorker, MinIOService minIOService) {
+    DocumentOCRService(TesseractOCRWorker tesseractOCRWorker, MinIOService minIOService, ElasticSearchService elasticSearchService) {
         this.tesseractOCRWorker = tesseractOCRWorker;
         this.minIOService = minIOService;
+        this.elasticSearchService = elasticSearchService;
     }
 
     @Override
     public String processDocument(String docName, int id) {
         try(InputStream fileStream = minIOService.download(docName)) {
             String content = tesseractOCRWorker.processFile(docName, fileStream);
+
+            ElasticSearchDocument document = new ElasticSearchDocument(id, docName, content);
+
+            Result res = elasticSearchService.indexDocument(document);
+
+            System.out.printf(res.toString());
 
             return content;
         }

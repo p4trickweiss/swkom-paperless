@@ -2,10 +2,13 @@ package at.technikumwien.swkom.paperlessservices.services.impl;
 
 
 import at.technikumwien.swkom.paperlessservices.config.ElasticSearchConfig;
+import at.technikumwien.swkom.paperlessservices.models.ElasticSearchDocument;
 import at.technikumwien.swkom.paperlessservices.services.ISearchIndexService;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.Result;
 import co.elastic.clients.elasticsearch.core.DeleteResponse;
+import co.elastic.clients.elasticsearch.core.IndexResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,15 +32,16 @@ public class ElasticSearchService implements ISearchIndexService {
         }
     }
 
-    /*
     @Override
-    public Result indexDocument() throws IOException {
+    public Result indexDocument(ElasticSearchDocument document) throws IOException {
         // do indexing with ElasticSearch
+
         IndexResponse response = esClient.index(i -> i
                 .index(ElasticSearchConfig.DOCUMENTS_INDEX_NAME)
-                .id(document.getId().toString())
+                .id(String.valueOf(document.getId()))
                 .document(document)
         );
+
         String logMsg = "Indexed document " + document.getId() + ": result=" + response.result() + ", index=" + response.index();
         if (response.result() != Result.Created && response.result() != Result.Updated)
             System.out.println("Failed to " + logMsg);
@@ -45,7 +49,6 @@ public class ElasticSearchService implements ISearchIndexService {
             System.out.println(logMsg);
         return response.result();
     }
-     */
 
     /*
     @Override
@@ -62,7 +65,7 @@ public class ElasticSearchService implements ISearchIndexService {
             return Optional.empty();
         }
     }
-     */
+    */
 
     @Override
     public boolean deleteDocumentById(int id) {
