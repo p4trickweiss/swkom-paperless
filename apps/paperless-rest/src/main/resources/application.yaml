@@ -29,3 +29,7 @@ minio:
     name: admin
     secret: admin-password
   endpoint: minio
+
+elasticsearch:
+  host: elastic-search
+  port: 9200

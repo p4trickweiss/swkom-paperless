@@ -176,5 +176,12 @@
             <version>8.5.7</version>
         </dependency>
 
+        <!--ElasticSearch-->
+        <dependency>
+            <groupId>co.elastic.clients</groupId>
+            <artifactId>elasticsearch-java</artifactId>
+            <version>8.9.0</version>
+        </dependency>
+
     </dependencies>
 </project>

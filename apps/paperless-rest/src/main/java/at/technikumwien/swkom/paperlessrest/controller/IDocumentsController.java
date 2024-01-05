@@ -38,6 +38,7 @@ public interface IDocumentsController {
      * @param storagePathIdIn  (optional)
      * @param correspondentId  (optional)
      * @param truncateContent  (optional)
+     * @param titleContent  (optional)
      * @return Success (status code 200)
      */
     @Operation(
@@ -63,7 +64,8 @@ public interface IDocumentsController {
             @Parameter(name = "document_type__id", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "document_type__id", required = false) Integer documentTypeId,
             @Parameter(name = "storage_path__id__in", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "storage_path__id__in", required = false) Integer storagePathIdIn,
             @Parameter(name = "correspondent__id", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "correspondent__id", required = false) Integer correspondentId,
-            @Parameter(name = "truncate_content", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "truncate_content", required = false) Boolean truncateContent
+            @Parameter(name = "truncate_content", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "truncate_content", required = false) Boolean truncateContent,
+            @Parameter(name = "title_content", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "title_content", required = false) String titleContent
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {

@@ -1,6 +1,8 @@
 package at.technikumwien.swkom.paperlessrest.controller.impl;
 
 import at.technikumwien.swkom.paperlessrest.controller.IDocumentsController;
+import at.technikumwien.swkom.paperlessrest.services.impl.ElasticSearchService;
+import at.technikumwien.swkom.paperlessrest.services.ISearchService;
 import at.technikumwien.swkom.paperlessrest.data.domain.DocumentsDocument;
 import at.technikumwien.swkom.paperlessrest.data.dto.BulkEditRequest;
 import at.technikumwien.swkom.paperlessrest.data.dto.GetDocuments200Response;
@@ -16,6 +18,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -37,13 +41,18 @@ public class DocumentsController implements IDocumentsController {
     private final IMessageBroker rabbit;
     private final IFileStorage minio;
     private final DocumentsDocumentRepository documentRepository;
+    private final ISearchService elasticSearchService;
+
+    private static final Logger logger = LoggerFactory.getLogger(RabbitMQMessageBroker.class);
+
 
     @Autowired
-    public DocumentsController(NativeWebRequest request, RabbitMQMessageBroker rabbit, MinIOFileStorage minio, DocumentsDocumentRepository documentRepository) {
+    public DocumentsController(NativeWebRequest request, RabbitMQMessageBroker rabbit, MinIOFileStorage minio, DocumentsDocumentRepository documentRepository, ElasticSearchService elasticSearchService) {
         this.request = request;
         this.rabbit = rabbit;
         this.minio = minio;
         this.documentRepository = documentRepository;
+        this.elasticSearchService = elasticSearchService;
     }
 
     @Override
@@ -65,9 +74,20 @@ public class DocumentsController implements IDocumentsController {
             @Parameter(name = "document_type__id", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "document_type__id", required = false) Integer documentTypeId,
             @Parameter(name = "storage_path__id__in", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "storage_path__id__in", required = false) Integer storagePathIdIn,
             @Parameter(name = "correspondent__id", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "correspondent__id", required = false) Integer correspondentId,
-            @Parameter(name = "truncate_content", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "truncate_content", required = false) Boolean truncateContent
+            @Parameter(name = "truncate_content", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "truncate_content", required = false) Boolean truncateContent,
+            @Parameter(name = "title_content", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "title_content", required = false) String titleContent
     ) {
-        List<DocumentsDocument> docs = documentRepository.findAll();
+        List<DocumentsDocument> docs;
+
+        if(titleContent != null){
+            List<Integer> res_ids = elasticSearchService.getDocumentByTitleContent(titleContent);
+            logger.info("Found: " + String.valueOf(res_ids.size()) + " items");
+            docs = documentRepository.findByIdIn(res_ids);
+        } else
+        {
+            docs = documentRepository.findAll();
+            logger.info("Show all Documents");
+        }
         List<GetDocuments200ResponseResultsInner> results = new ArrayList<>();
         for(DocumentsDocument result : docs) {
             GetDocuments200ResponseResultsInner document = new GetDocuments200ResponseResultsInner();
@@ -80,7 +100,6 @@ public class DocumentsController implements IDocumentsController {
         GetDocuments200Response res = new GetDocuments200Response();
         res.count(docs.size());
         res.results(results);
-
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
@@ -112,6 +131,7 @@ public class DocumentsController implements IDocumentsController {
 
         //upload file to minio
         minio.upload(bucketPath, file);
+        logger.info("Uploaded to Minio!");
 
         //send message with bucket path to rabbitmq
         ObjectMapper mapper = new ObjectMapper();
@@ -119,6 +139,7 @@ public class DocumentsController implements IDocumentsController {
         try {
             String message = mapper.writeValueAsString(scanDocumentMessage);
             rabbit.send(message);
+            logger.info("sent to rabbitmq!");
         }
         catch (JacksonException e) {
             System.out.println(e.getMessage());
