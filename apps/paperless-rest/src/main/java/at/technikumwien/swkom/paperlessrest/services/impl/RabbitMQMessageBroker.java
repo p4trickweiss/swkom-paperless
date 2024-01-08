@@ -45,7 +45,6 @@ public class RabbitMQMessageBroker implements IMessageBroker {
             logger.info("Content added succesfully. ID: {}", documentResultMessage.getId());
         }
         catch (JacksonException e) {
-            System.out.println(e.getMessage());
             logger.error("Error: ", e);
         }
 
