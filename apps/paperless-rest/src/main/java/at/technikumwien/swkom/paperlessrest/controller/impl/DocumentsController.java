@@ -1,12 +1,10 @@
 package at.technikumwien.swkom.paperlessrest.controller.impl;
 
 import at.technikumwien.swkom.paperlessrest.controller.IDocumentsController;
+import at.technikumwien.swkom.paperlessrest.data.dto.*;
 import at.technikumwien.swkom.paperlessrest.services.impl.ElasticSearchService;
 import at.technikumwien.swkom.paperlessrest.services.ISearchService;
 import at.technikumwien.swkom.paperlessrest.data.domain.DocumentsDocument;
-import at.technikumwien.swkom.paperlessrest.data.dto.BulkEditRequest;
-import at.technikumwien.swkom.paperlessrest.data.dto.GetDocuments200Response;
-import at.technikumwien.swkom.paperlessrest.data.dto.GetDocuments200ResponseResultsInner;
 import at.technikumwien.swkom.paperlessrest.data.repos.DocumentsDocumentRepository;
 import at.technikumwien.swkom.paperlessrest.services.IFileStorage;
 import at.technikumwien.swkom.paperlessrest.services.IMessageBroker;
@@ -32,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -104,6 +103,59 @@ public class DocumentsController implements IDocumentsController {
     }
 
     @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/api/documents/{id}/",
+            produces = { "application/json" }
+    )
+    public ResponseEntity<GetDocument200Response> getDocument(
+            @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id,
+            @Parameter(name = "page", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "page", required = false) Integer page,
+            @Parameter(name = "full_perms", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "full_perms", required = false) Boolean fullPerms
+    ) {
+        Optional<DocumentsDocument> doc = documentRepository.findById(id);
+        GetDocument200Response res = new GetDocument200Response();
+        res.setId(doc.get().getId());
+        res.setTitle(doc.get().getTitle());
+
+        return new ResponseEntity<>(res, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(
+            method = RequestMethod.PUT,
+            value = "/api/documents/{id}/",
+            produces = { "application/json" },
+            consumes = { "application/json" }
+    )
+    public ResponseEntity<UpdateDocument200Response> updateDocument(
+            @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id,
+            @Parameter(name = "UpdateDocumentRequest", description = "") @RequestBody(required = false) UpdateDocumentRequest updateDocumentRequest
+    ) {
+        Optional<DocumentsDocument> doc = documentRepository.findById(id);
+        doc.get().setTitle(updateDocumentRequest.getTitle());
+        documentRepository.save(doc.get());
+
+        UpdateDocument200Response res = new UpdateDocument200Response();
+        res.id(doc.get().getId());
+        res.title(doc.get().getTitle());
+        res.added(doc.get().getAdded().toString());
+        res.created(doc.get().getCreated().toString());
+
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            value = "/api/documents/{id}/"
+    )
+    public ResponseEntity<Void> deleteDocument(
+            @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id
+    ) {
+        documentRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(
             method = RequestMethod.POST,
             value = "/api/documents/post_document/",
             consumes = { "multipart/form-data" }
@@ -156,9 +208,11 @@ public class DocumentsController implements IDocumentsController {
     public ResponseEntity<Void> bulkEdit(
             @Parameter(name = "BulkEditRequest", description = "") @Valid @RequestBody(required = false) BulkEditRequest bulkEditRequest
     ) {
-        List<Integer> ids = bulkEditRequest.getDocuments();
-        for(Integer id : ids) {
-            documentRepository.deleteById(id);
+        if(Objects.equals(bulkEditRequest.getMethod(), "delete")) {
+            List<Integer> ids = bulkEditRequest.getDocuments();
+            for(Integer id : ids) {
+                documentRepository.deleteById(id);
+            }
         }
 
         return new ResponseEntity<>(HttpStatus.OK);

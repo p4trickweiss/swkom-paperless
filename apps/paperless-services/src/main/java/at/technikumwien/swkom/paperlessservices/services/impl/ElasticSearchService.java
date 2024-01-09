@@ -35,7 +35,6 @@ public class ElasticSearchService implements ISearchIndexService {
     @Override
     public Result indexDocument(ElasticSearchDocument document) throws IOException {
         // do indexing with ElasticSearch
-
         IndexResponse response = esClient.index(i -> i
                 .index(ElasticSearchConfig.DOCUMENTS_INDEX_NAME)
                 .id(String.valueOf(document.getId()))
