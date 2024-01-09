@@ -1,13 +1,8 @@
 package at.technikumwien.swkom.paperlessservices.services.impl;
 
-import at.technikumwien.swkom.paperlessservices.data.messagequeue.DocumentResultMessage;
 import at.technikumwien.swkom.paperlessservices.models.ElasticSearchDocument;
 import at.technikumwien.swkom.paperlessservices.services.*;
 import co.elastic.clients.elasticsearch._types.Result;
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

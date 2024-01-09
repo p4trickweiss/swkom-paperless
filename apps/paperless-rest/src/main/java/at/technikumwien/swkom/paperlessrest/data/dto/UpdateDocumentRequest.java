@@ -95,7 +95,7 @@ public class UpdateDocumentRequest {
    * @return id
   */
   @NotNull 
-  @Schema(name = "id", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "id", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("id")
   public Integer getId() {
     return id;
@@ -114,8 +114,7 @@ public class UpdateDocumentRequest {
    * Get correspondent
    * @return correspondent
   */
-  @NotNull 
-  @Schema(name = "correspondent", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "correspondent", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("correspondent")
   public Integer getCorrespondent() {
     return correspondent;
@@ -134,8 +133,7 @@ public class UpdateDocumentRequest {
    * Get documentType
    * @return documentType
   */
-  @NotNull 
-  @Schema(name = "document_type", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "document_type", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("document_type")
   public Integer getDocumentType() {
     return documentType;
@@ -154,8 +152,7 @@ public class UpdateDocumentRequest {
    * Get storagePath
    * @return storagePath
   */
-  @NotNull 
-  @Schema(name = "storage_path", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "storage_path", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("storage_path")
   public Integer getStoragePath() {
     return storagePath;
@@ -174,8 +171,7 @@ public class UpdateDocumentRequest {
    * Get title
    * @return title
   */
-  @NotNull 
-  @Schema(name = "title", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "title", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("title")
   public String getTitle() {
     return title;
@@ -194,8 +190,7 @@ public class UpdateDocumentRequest {
    * Get content
    * @return content
   */
-  @NotNull 
-  @Schema(name = "content", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "content", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("content")
   public String getContent() {
     return content;
@@ -222,8 +217,7 @@ public class UpdateDocumentRequest {
    * Get tags
    * @return tags
   */
-  @NotNull 
-  @Schema(name = "tags", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "tags", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("tags")
   public List<Integer> getTags() {
     return tags;
@@ -242,8 +236,7 @@ public class UpdateDocumentRequest {
    * Get createdDate
    * @return createdDate
   */
-  @NotNull 
-  @Schema(name = "created_date", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "created_date", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("created_date")
   public String getCreatedDate() {
     return createdDate;
@@ -262,8 +255,7 @@ public class UpdateDocumentRequest {
    * Get modified
    * @return modified
   */
-  @NotNull 
-  @Schema(name = "modified", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "modified", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("modified")
   public String getModified() {
     return modified;
@@ -282,8 +274,7 @@ public class UpdateDocumentRequest {
    * Get added
    * @return added
   */
-  @NotNull 
-  @Schema(name = "added", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "added", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("added")
   public String getAdded() {
     return added;
@@ -302,8 +293,7 @@ public class UpdateDocumentRequest {
    * Get archiveSerialNumber
    * @return archiveSerialNumber
   */
-  @NotNull 
-  @Schema(name = "archive_serial_number", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "archive_serial_number", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("archive_serial_number")
   public Integer getArchiveSerialNumber() {
     return archiveSerialNumber;
@@ -322,8 +312,7 @@ public class UpdateDocumentRequest {
    * Get originalFileName
    * @return originalFileName
   */
-  @NotNull 
-  @Schema(name = "original_file_name", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "original_file_name", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("original_file_name")
   public String getOriginalFileName() {
     return originalFileName;
@@ -342,8 +331,7 @@ public class UpdateDocumentRequest {
    * Get archivedFileName
    * @return archivedFileName
   */
-  @NotNull 
-  @Schema(name = "archived_file_name", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "archived_file_name", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("archived_file_name")
   public String getArchivedFileName() {
     return archivedFileName;
@@ -362,8 +350,7 @@ public class UpdateDocumentRequest {
    * Get owner
    * @return owner
   */
-  @NotNull 
-  @Schema(name = "owner", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "owner", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("owner")
   public Integer getOwner() {
     return owner;
@@ -382,8 +369,7 @@ public class UpdateDocumentRequest {
    * Get permissions
    * @return permissions
   */
-  @NotNull @Valid 
-  @Schema(name = "permissions", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "permissions", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("permissions")
   public GetCorrespondents200ResponseResultsInnerPermissions getPermissions() {
     return permissions;
@@ -410,8 +396,7 @@ public class UpdateDocumentRequest {
    * Get notes
    * @return notes
   */
-  @NotNull 
-  @Schema(name = "notes", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "notes", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("notes")
   public List<Object> getNotes() {
     return notes;
@@ -432,8 +417,7 @@ public class UpdateDocumentRequest {
    * Get setPermissions
    * @return setPermissions
   */
-  @NotNull @Valid 
-  @Schema(name = "set_permissions", requiredMode = Schema.RequiredMode.REQUIRED)
+  @Schema(name = "set_permissions", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("set_permissions")
   public GetCorrespondents200ResponseResultsInnerPermissions getSetPermissions() {
     return setPermissions;
