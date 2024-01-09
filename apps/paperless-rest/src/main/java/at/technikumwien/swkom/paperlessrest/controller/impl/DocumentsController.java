@@ -28,7 +28,7 @@ public class DocumentsController implements IDocumentsController {
     private final NativeWebRequest request;
     private final DocumentsService documentsService;
 
-    private static final Logger logger = LoggerFactory.getLogger(RabbitMQMessageBroker.class);
+    private static final Logger logger = LoggerFactory.getLogger(DocumentsController.class);
 
 
     @Autowired
