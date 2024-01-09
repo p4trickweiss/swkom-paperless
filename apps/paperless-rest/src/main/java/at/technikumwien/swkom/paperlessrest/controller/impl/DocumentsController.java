@@ -2,17 +2,8 @@ package at.technikumwien.swkom.paperlessrest.controller.impl;
 
 import at.technikumwien.swkom.paperlessrest.controller.IDocumentsController;
 import at.technikumwien.swkom.paperlessrest.data.dto.*;
-import at.technikumwien.swkom.paperlessrest.services.impl.ElasticSearchService;
-import at.technikumwien.swkom.paperlessrest.services.ISearchService;
-import at.technikumwien.swkom.paperlessrest.data.domain.DocumentsDocument;
-import at.technikumwien.swkom.paperlessrest.data.repos.DocumentsDocumentRepository;
-import at.technikumwien.swkom.paperlessrest.services.IFileStorage;
-import at.technikumwien.swkom.paperlessrest.services.IMessageBroker;
-import at.technikumwien.swkom.paperlessrest.data.messagequeue.ScanDocumentMessage;
-import at.technikumwien.swkom.paperlessrest.services.impl.MinIOFileStorage;
+import at.technikumwien.swkom.paperlessrest.services.impl.DocumentsService;
 import at.technikumwien.swkom.paperlessrest.services.impl.RabbitMQMessageBroker;
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import jakarta.validation.Valid;
@@ -28,30 +19,22 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
 public class DocumentsController implements IDocumentsController {
     private final NativeWebRequest request;
-    private final IMessageBroker rabbit;
-    private final IFileStorage minio;
-    private final DocumentsDocumentRepository documentRepository;
-    private final ISearchService elasticSearchService;
+    private final DocumentsService documentsService;
 
     private static final Logger logger = LoggerFactory.getLogger(RabbitMQMessageBroker.class);
 
 
     @Autowired
-    public DocumentsController(NativeWebRequest request, RabbitMQMessageBroker rabbit, MinIOFileStorage minio, DocumentsDocumentRepository documentRepository, ElasticSearchService elasticSearchService) {
+    public DocumentsController(NativeWebRequest request, DocumentsService documentsService) {
         this.request = request;
-        this.rabbit = rabbit;
-        this.minio = minio;
-        this.documentRepository = documentRepository;
-        this.elasticSearchService = elasticSearchService;
+        this.documentsService = documentsService;
     }
 
     @Override
@@ -76,29 +59,14 @@ public class DocumentsController implements IDocumentsController {
             @Parameter(name = "truncate_content", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "truncate_content", required = false) Boolean truncateContent,
             @Parameter(name = "title_content", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "title_content", required = false) String titleContent
     ) {
-        List<DocumentsDocument> docs;
+        GetDocuments200Response res;
 
         if(titleContent != null){
-            List<Integer> res_ids = elasticSearchService.getDocumentByTitleContent(titleContent);
-            logger.info("Found: " + String.valueOf(res_ids.size()) + " items");
-            docs = documentRepository.findByIdIn(res_ids);
+            res = documentsService.getFilteredDocuments(titleContent);
         } else
         {
-            docs = documentRepository.findAll();
-            logger.info("Show all Documents");
+            res = documentsService.getAllDocuments();
         }
-        List<GetDocuments200ResponseResultsInner> results = new ArrayList<>();
-        for(DocumentsDocument result : docs) {
-            GetDocuments200ResponseResultsInner document = new GetDocuments200ResponseResultsInner();
-            document.id(result.getId());
-            document.content(result.getContent());
-            document.title(result.getTitle());
-
-            results.add(document);
-        }
-        GetDocuments200Response res = new GetDocuments200Response();
-        res.count(docs.size());
-        res.results(results);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
@@ -112,13 +80,8 @@ public class DocumentsController implements IDocumentsController {
             @Parameter(name = "page", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "page", required = false) Integer page,
             @Parameter(name = "full_perms", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "full_perms", required = false) Boolean fullPerms
     ) {
-        Optional<DocumentsDocument> doc = documentRepository.findById(id);
-        GetDocument200Response res = new GetDocument200Response();
-        res.setId(doc.get().getId());
-        res.setTitle(doc.get().getTitle());
-
+        GetDocument200Response res = documentsService.getDocument(id);
         return new ResponseEntity<>(res, HttpStatus.OK);
-
     }
 
     @RequestMapping(
@@ -131,28 +94,8 @@ public class DocumentsController implements IDocumentsController {
             @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id,
             @Parameter(name = "UpdateDocumentRequest", description = "") @RequestBody(required = false) UpdateDocumentRequest updateDocumentRequest
     ) {
-        Optional<DocumentsDocument> doc = documentRepository.findById(id);
-        doc.get().setTitle(updateDocumentRequest.getTitle());
-        documentRepository.save(doc.get());
-
-        UpdateDocument200Response res = new UpdateDocument200Response();
-        res.id(doc.get().getId());
-        res.title(doc.get().getTitle());
-        res.added(doc.get().getAdded().toString());
-        res.created(doc.get().getCreated().toString());
-
+        UpdateDocument200Response res = documentsService.updateDocument(id, updateDocumentRequest);
         return new ResponseEntity<>(res, HttpStatus.OK);
-    }
-
-    @RequestMapping(
-            method = RequestMethod.DELETE,
-            value = "/api/documents/{id}/"
-    )
-    public ResponseEntity<Void> deleteDocument(
-            @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id
-    ) {
-        documentRepository.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(
@@ -168,35 +111,7 @@ public class DocumentsController implements IDocumentsController {
             @Parameter(name = "correspondent", description = "") @Valid @RequestParam(value = "correspondent", required = false) Integer correspondent,
             @Parameter(name = "document", description = "") @RequestPart(value = "document", required = false) List<MultipartFile> document
     ) {
-        //save to db
-        MultipartFile file = document.get(0);
-
-        DocumentsDocument doc = new DocumentsDocument();
-        doc.setFilename(file.getOriginalFilename());
-        doc.setTitle(file.getOriginalFilename());
-        doc.setCreated(OffsetDateTime.now());
-        doc.setModified(OffsetDateTime.now());
-        doc.setAdded(OffsetDateTime.now());
-
-        Integer docId = documentRepository.save(doc).getId();
-        String bucketPath = docId.toString() + "/" + doc.getFilename();
-
-        //upload file to minio
-        minio.upload(bucketPath, file);
-        logger.info("Uploaded to Minio!");
-
-        //send message with bucket path to rabbitmq
-        ObjectMapper mapper = new ObjectMapper();
-        ScanDocumentMessage scanDocumentMessage = new ScanDocumentMessage(docId, bucketPath);
-        try {
-            String message = mapper.writeValueAsString(scanDocumentMessage);
-            rabbit.send(message);
-            logger.info("sent to rabbitmq!");
-        }
-        catch (JacksonException e) {
-            System.out.println(e.getMessage());
-        }
-
+        documentsService.uploadDocument(document.get(0));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -208,13 +123,7 @@ public class DocumentsController implements IDocumentsController {
     public ResponseEntity<Void> bulkEdit(
             @Parameter(name = "BulkEditRequest", description = "") @Valid @RequestBody(required = false) BulkEditRequest bulkEditRequest
     ) {
-        if(Objects.equals(bulkEditRequest.getMethod(), "delete")) {
-            List<Integer> ids = bulkEditRequest.getDocuments();
-            for(Integer id : ids) {
-                documentRepository.deleteById(id);
-            }
-        }
-
+        documentsService.bulkEdit(bulkEditRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
